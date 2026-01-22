@@ -6,51 +6,61 @@ Reddit Top Posts Fetcher (via SociaVault API)
 Fetches and displays the top 15 upvoted posts from selected investment subreddits
 from the past day using the SociaVault API in a clean, readable terminal format.
 
-Installation:
+SUBREDDITS COVERED:
+    - r/ValueInvesting (value investing strategies and discussions)
+    - r/stocks (stock market discussions and analysis)
+    - r/options (options trading strategies and education)
+
+INSTALLATION:
     pip install requests rich
 
-Configuration:
+CONFIGURATION:
     export SOCIAVAULT_API_KEY="your_api_key_here"
 
-Usage:
-    python SCRIPT_reddit_top_posts.py                    # Default: top 15 from all 3 subreddits
+BASIC USAGE:
+    python SCRIPT_reddit_top_posts.py                    # Default: top 15 from past day
     python SCRIPT_reddit_top_posts.py --count 10         # Show top 10 per subreddit
-    python SCRIPT_reddit_top_posts.py --timeframe week   # Show from past week instead
+    python SCRIPT_reddit_top_posts.py --timeframe week   # Show from past week
 
-Features:
-    - Fetches top posts from r/ValueInvesting, r/stocks, and r/options
-    - Beautiful terminal formatting with rich markup
-    - Sorted by upvotes (highest first)
-    - Shows title, upvotes, comments, and URL for each post
-    - Configurable post count with --count flag
-    - Default shows top 15 posts per subreddit
+PARAMETERS:
+    --count      Number of posts per subreddit (default: 15)
+    --timeframe  Time period: hour, day, week, month, year, all (default: day)
 
-Requirements:
+OUTPUT FORMAT:
+    - Post title (bold, cyan)
+    - Upvotes (green) and comments (blue)
+    - Upvote ratio percentage
+    - Author username
+    - Clickable URL
+    - Post body text (first 300 chars if available)
+
+API COST:
+    - Credit check: 0 credits (runs automatically)
+    - Per subreddit: 1 credit
+    - Total per run: 3 credits
+
+FEATURES:
+    - Smart retry logic with exponential backoff
+    - Rate limiting protection (handles 429 errors)
+    - Timeout handling with retries
+    - Beautiful terminal formatting
+    - Automatic credit checking
+
+REQUIREMENTS:
     - Python 3.7+
     - requests (for API calls)
     - rich (for terminal formatting)
-    - Valid SociaVault API key set as environment variable
+    - Valid SociaVault API key
 
-How it works:
-    1. Fetches posts from each subreddit via SociaVault API
-    2. Filters for top posts from past day
-    3. Sorts by upvotes (highest first)
-    4. Displays in formatted terminal output
-    5. Shows up to 15 posts per subreddit (or custom count)
-
-Output includes:
-    - Post title (in colored format)
-    - Upvote count and comment count
-    - Post body text (if available, truncated if long)
-    - Post URL (clickable in most terminals)
-
-Note:
-    Each subreddit fetch costs 1 API credit (3 credits total per run).
-    The API typically returns ~25 posts per request.
+TROUBLESHOOTING:
+    - "API key not set": Export SOCIAVAULT_API_KEY environment variable
+    - "Insufficient credits": Check your SociaVault account
+    - Connection timeout: Script retries up to 3 times with exponential backoff
 """
 
 import os
 import sys
+import time
 import argparse
 from datetime import datetime
 from rich.console import Console
@@ -72,6 +82,8 @@ DEFAULT_POST_COUNT = 15  # Show top 15 posts per subreddit
 DEFAULT_TIMEFRAME = "day"  # Fetch from past day
 SUBREDDITS = ["ValueInvesting", "stocks", "options"]
 REQUEST_TIMEOUT = 30  # seconds
+MAX_RETRIES = 3  # Max retries for rate limiting/timeouts
+RETRY_DELAY = 2  # Initial delay in seconds for exponential backoff
 
 # ============================================================================
 # API CLIENT
@@ -100,7 +112,7 @@ class SociaVaultClient:
 
     def fetch_subreddit_posts(self, subreddit: str, timeframe: str = "day", sort: str = "top"):
         """
-        Fetch posts from a subreddit.
+        Fetch posts from a subreddit with retry logic.
 
         Args:
             subreddit: Subreddit name (without r/ prefix)
@@ -109,6 +121,9 @@ class SociaVaultClient:
 
         Returns:
             API response as dictionary (typically ~25 posts per page)
+
+        Raises:
+            Exception: If the request fails after all retries
         """
         params = {
             "subreddit": subreddit,
@@ -117,14 +132,56 @@ class SociaVaultClient:
             "trim": False
         }
 
-        response = requests.get(
-            f"{SOCIAVAULT_BASE_URL}/scrape/reddit/subreddit",
-            headers=self.headers,
-            params=params,
-            timeout=REQUEST_TIMEOUT
-        )
-        response.raise_for_status()
-        return response.json()
+        # Retry logic with exponential backoff
+        for attempt in range(MAX_RETRIES):
+            try:
+                response = requests.get(
+                    f"{SOCIAVAULT_BASE_URL}/scrape/reddit/subreddit",
+                    headers=self.headers,
+                    params=params,
+                    timeout=REQUEST_TIMEOUT
+                )
+
+                # Handle rate limiting (429) with retry
+                if response.status_code == 429:
+                    if attempt < MAX_RETRIES - 1:
+                        delay = RETRY_DELAY * (2 ** attempt)  # Exponential backoff: 2s, 4s, 8s
+                        print(f"  ⚠️  Rate limit hit for r/{subreddit} (attempt {attempt + 1}/{MAX_RETRIES})")
+                        print(f"  ⏳ Waiting {delay}s before retry...")
+                        time.sleep(delay)
+                        continue
+                    else:
+                        raise Exception(f"API rate limit exceeded for r/{subreddit} after {MAX_RETRIES} retries.")
+
+                # Raise for other HTTP errors
+                response.raise_for_status()
+                return response.json()
+
+            except requests.exceptions.HTTPError as e:
+                if response.status_code == 401:
+                    raise Exception("Authentication failed. Please check your SOCIAVAULT_API_KEY.")
+                elif response.status_code == 402:
+                    raise Exception("Insufficient credits. Please check your SociaVault account.")
+                elif response.status_code == 403:
+                    raise Exception("Access forbidden. Your API key may not have access to this endpoint.")
+                elif response.status_code == 429:
+                    # Already handled above, but catch it here too
+                    continue
+                else:
+                    raise Exception(f"API request failed with status {response.status_code}: {str(e)}")
+            except requests.exceptions.Timeout:
+                if attempt < MAX_RETRIES - 1:
+                    delay = RETRY_DELAY * (2 ** attempt)
+                    print(f"  ⚠️  Request timeout for r/{subreddit} (attempt {attempt + 1}/{MAX_RETRIES})")
+                    print(f"  ⏳ Retrying in {delay}s...")
+                    time.sleep(delay)
+                    continue
+                raise Exception(f"API request timed out for r/{subreddit} after multiple retries.")
+            except requests.exceptions.RequestException as e:
+                raise Exception(f"API request failed for r/{subreddit}: {str(e)}")
+
+        # If we exhausted all retries
+        raise Exception(f"API request failed for r/{subreddit} after {MAX_RETRIES} retries.")
 
 # ============================================================================
 # HELPER FUNCTIONS
