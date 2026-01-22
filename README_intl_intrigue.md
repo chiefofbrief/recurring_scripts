@@ -10,23 +10,23 @@ pip install -r requirements_intl_intrigue.txt
 
 ## Usage
 
-### Show summary (default):
+### Show full article (default):
 ```bash
 python SCRIPT_intl_intrigue.py
 ```
 
-### Show full article:
+### Show brief summary only:
 ```bash
-python SCRIPT_intl_intrigue.py --full
+python SCRIPT_intl_intrigue.py --summary
 ```
 
 ## Features
 
 - Automatically fetches the latest post from International Intrigue
 - Bypasses Cloudflare protection using curl_cffi
-- Clean, formatted terminal output using rich
-- Converts HTML to readable text/Markdown format
-- Command-line flag to show full text or summary
+- Beautiful terminal formatting with rich Markdown rendering
+- Converts HTML to readable, formatted text
+- Shows full article by default with optional --summary flag
 
 ## Requirements
 

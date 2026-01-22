@@ -6,8 +6,8 @@ Fetches and displays the most recent post from the International Intrigue newsle
 in a clean, readable terminal format.
 
 Usage:
-    python SCRIPT_intl_intrigue.py              # Show summary
-    python SCRIPT_intl_intrigue.py --full       # Show full article text
+    python SCRIPT_intl_intrigue.py              # Show full article (default)
+    python SCRIPT_intl_intrigue.py --summary    # Show brief summary only
 
 Prerequisites:
     pip install curl_cffi beautifulsoup4 rich html2text
@@ -266,13 +266,13 @@ def format_date(date_str):
     return date_str
 
 
-def display_post(post_data, full_text=False, console=None):
+def display_post(post_data, summary_only=False, console=None):
     """
     Display the post content in a formatted way using rich.
 
     Args:
         post_data (dict): Dictionary with 'title', 'date', and 'body'
-        full_text (bool): Whether to show full text or a summary
+        summary_only (bool): Whether to show brief summary only
         console (Console): Rich console object
     """
     if console is None:
@@ -294,24 +294,40 @@ def display_post(post_data, full_text=False, console=None):
     # Process body
     body = post_data['body']
 
-    if not full_text:
-        # Show first ~500 characters as a summary
+    if summary_only:
+        # Extract just the key headlines/bullet points for summary
         lines = body.split('\n')
         summary_lines = []
-        char_count = 0
+        in_briefing = False
 
         for line in lines:
-            if char_count > 500:
-                break
-            summary_lines.append(line)
-            char_count += len(line)
+            stripped = line.strip()
+            # Look for the "Today's briefing" section or main bullet points
+            if 'today' in stripped.lower() and 'briefing' in stripped.lower():
+                in_briefing = True
+                summary_lines.append(line)
+                continue
+            if in_briefing:
+                # Capture bullet points
+                if stripped.startswith('—') or stripped.startswith('-') or stripped.startswith('*'):
+                    summary_lines.append(line)
+                elif stripped and not stripped.startswith('#') and len(summary_lines) > 3:
+                    # Stop after we have some bullets and hit a non-bullet line
+                    break
+            # Also capture main headers
+            elif stripped.startswith('###') or stripped.startswith('##'):
+                summary_lines.append(line)
 
-        body = '\n'.join(summary_lines)
-        if char_count > 500:
-            body += "\n\n[dim]...(use --full to see complete article)[/dim]"
+        if summary_lines:
+            body = '\n'.join(summary_lines)
+            body += "\n\n[dim italic](Run without --summary to see full article)[/dim italic]"
+        else:
+            # Fallback to first ~1000 chars if we can't find structure
+            body = body[:1000] + "\n\n[dim italic]...(Run without --summary to see full article)[/dim italic]"
 
-    # Print body
-    console.print(body)
+    # Use rich Markdown renderer for beautiful formatting
+    md = Markdown(body)
+    console.print(md)
     console.print("\n" + "─" * console.width + "\n")
 
 
@@ -328,9 +344,9 @@ def main():
         description='Fetch and display the latest International Intrigue newsletter post'
     )
     parser.add_argument(
-        '--full',
+        '--summary',
         action='store_true',
-        help='Show full article text instead of summary'
+        help='Show brief summary only (default: show full article)'
     )
     args = parser.parse_args()
 
@@ -361,7 +377,7 @@ def main():
         post_data = extract_post_content(post_html)
 
         # Step 5: Display the post
-        display_post(post_data, full_text=args.full, console=console)
+        display_post(post_data, summary_only=args.summary, console=console)
 
         return 0
 
