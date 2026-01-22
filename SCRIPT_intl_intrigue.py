@@ -32,6 +32,7 @@ import sys
 import argparse
 import time
 import json
+import re
 from bs4 import BeautifulSoup
 from rich.console import Console
 from rich.panel import Panel
@@ -231,9 +232,15 @@ def extract_post_content(post_html):
         # Convert HTML to markdown-style text
         h = html2text.HTML2Text()
         h.ignore_links = False
-        h.ignore_images = False
-        h.ignore_emphasis = False
-        h.body_width = 80
+        h.ignore_images = True  # Images don't display well in terminal
+        h.ignore_emphasis = False  # Keep bold/italic
+        h.body_width = 0  # No wrapping - let rich handle it
+        h.unicode_snob = True  # Use unicode characters
+        h.wrap_links = False
+        h.skip_internal_links = False
+        h.inline_links = True
+        h.protect_links = True
+        h.mark_code = True
         body = h.handle(body_html)
     else:
         body = "Could not extract article body"
@@ -325,9 +332,37 @@ def display_post(post_data, summary_only=False, console=None):
             # Fallback to first ~1000 chars if we can't find structure
             body = body[:1000] + "\n\n[dim italic]...(Run without --summary to see full article)[/dim italic]"
 
-    # Use rich Markdown renderer for beautiful formatting
-    md = Markdown(body)
-    console.print(md)
+    # Clean up the markdown before rendering
+    # Remove excessive blank lines
+    body = re.sub(r'\n{3,}', '\n\n', body)
+
+    # Simplify: Convert markdown links to just text
+    body = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', body)
+
+    # Remove images
+    body = re.sub(r'!\[[^\]]*\]\([^\)]+\)', '', body)
+
+    # Convert markdown formatting to rich markup
+    # **bold** -> [bold]bold[/bold]
+    body = re.sub(r'\*\*([^\*]+)\*\*', r'[bold]\1[/bold]', body)
+
+    # *italic* -> [italic]italic[/italic] (but not ** patterns)
+    body = re.sub(r'(?<!\*)\*([^\*\n]+?)\*(?!\*)', r'[italic]\1[/italic]', body)
+
+    # Headers with color
+    body = re.sub(r'^###\s+(.+)$', r'\n[bold cyan]### \1[/bold cyan]', body, flags=re.MULTILINE)
+    body = re.sub(r'^##\s+(.+)$', r'\n[bold cyan]## \1[/bold cyan]', body, flags=re.MULTILINE)
+    body = re.sub(r'^#\s+(.+)$', r'\n[bold cyan]# \1[/bold cyan]', body, flags=re.MULTILINE)
+
+    # Bullet points
+    body = re.sub(r'^  \*\s+', '    ◦ ', body, flags=re.MULTILINE)
+    body = re.sub(r'^\*\s+', '  • ', body, flags=re.MULTILINE)
+    body = re.sub(r'^  -\s+', '    ◦ ', body, flags=re.MULTILINE)
+    body = re.sub(r'^-\s+', '  • ', body, flags=re.MULTILINE)
+    body = re.sub(r'^—\s+', '  — ', body, flags=re.MULTILINE)
+
+    # Print with rich markup enabled
+    console.print(body, markup=True, highlight=False, soft_wrap=True)
     console.print("\n" + "─" * console.width + "\n")
 
 
