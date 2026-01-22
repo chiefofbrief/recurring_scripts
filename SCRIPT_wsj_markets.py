@@ -9,7 +9,7 @@ Installation:
     pip install curl_cffi beautifulsoup4 rich html2text lxml
 
 Usage:
-    python SCRIPT_wsj_markets.py              # Show top 5 articles with full content (default)
+    python SCRIPT_wsj_markets.py              # Show all articles with full content (default)
     python SCRIPT_wsj_markets.py --summary    # Show top 10 headlines only
     python SCRIPT_wsj_markets.py --count 3    # Show top 3 articles with full content
     python SCRIPT_wsj_markets.py --summary --count 15  # Show top 15 headlines
@@ -19,7 +19,7 @@ Features:
     - Bypasses potential restrictions using curl_cffi
     - Beautiful terminal formatting with rich markup
     - Converts HTML descriptions to readable, formatted text
-    - Shows top 5 articles by default with optional --summary flag for headlines only
+    - Shows all articles by default with optional --summary flag for headlines only
     - Configurable article count with --count flag
     - No authentication or API keys required
 
@@ -36,7 +36,7 @@ How it works:
     2. Parses XML to extract feed items (title, link, description, pubDate)
     3. Converts HTML descriptions to formatted text
     4. Displays with color, bold, italic, and proper formatting
-    5. Shows configurable number of articles (default: 5 full, 10 summary)
+    5. Shows all articles by default in full mode, or top 10 in summary mode
 
 Output includes:
     - Article title (in colored panel)
@@ -72,7 +72,6 @@ except ImportError:
 
 RSS_FEED_URL = "https://feeds.content.dowjones.io/public/rss/RSSMarketsMain"
 REQUEST_TIMEOUT = 30  # seconds
-DEFAULT_FULL_COUNT = 5  # Number of articles to show in full mode
 DEFAULT_SUMMARY_COUNT = 10  # Number of headlines to show in summary mode
 
 # ============================================================================
@@ -267,10 +266,15 @@ def display_articles(articles, summary_only=False, count=None, console=None):
 
     # Determine how many articles to show
     if count is None:
-        count = DEFAULT_SUMMARY_COUNT if summary_only else DEFAULT_FULL_COUNT
-
-    # Limit to requested count
-    articles_to_show = articles[:count]
+        if summary_only:
+            count = DEFAULT_SUMMARY_COUNT
+            articles_to_show = articles[:count]
+        else:
+            # Show all articles in full mode by default
+            articles_to_show = articles
+    else:
+        # Limit to requested count
+        articles_to_show = articles[:count]
 
     if not articles_to_show:
         console.print("[yellow]No articles found in the RSS feed.[/yellow]")
@@ -335,7 +339,7 @@ def main():
     parser.add_argument(
         '--count',
         type=int,
-        help=f'Number of articles to display (default: {DEFAULT_FULL_COUNT} for full, {DEFAULT_SUMMARY_COUNT} for summary)'
+        help=f'Number of articles to display (default: all articles for full mode, {DEFAULT_SUMMARY_COUNT} for summary)'
     )
     args = parser.parse_args()
 
