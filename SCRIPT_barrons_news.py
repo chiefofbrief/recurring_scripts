@@ -54,6 +54,7 @@ Note:
 
 import os
 import sys
+import time
 import argparse
 from datetime import datetime, timedelta
 from dateutil import parser as date_parser
@@ -76,6 +77,8 @@ BARRONS_DOMAIN = "barrons.com"
 REQUEST_TIMEOUT = 30  # seconds
 DEFAULT_ARTICLE_COUNT = 50  # Show top 50 by default
 DEFAULT_DAYS_BACK = 1  # Fetch from past 1 day by default
+MAX_RETRIES = 3  # Max retries for rate limiting
+RETRY_DELAY = 5  # Initial delay in seconds for exponential backoff
 
 # ============================================================================
 # HELPER FUNCTIONS
@@ -83,7 +86,7 @@ DEFAULT_DAYS_BACK = 1  # Fetch from past 1 day by default
 
 def fetch_barrons_articles(api_key, days_back=DEFAULT_DAYS_BACK):
     """
-    Fetch Barron's articles from Perigon API.
+    Fetch Barron's articles from Perigon API with retry logic.
 
     Args:
         api_key (str): Perigon API key
@@ -93,7 +96,7 @@ def fetch_barrons_articles(api_key, days_back=DEFAULT_DAYS_BACK):
         dict: API response with articles
 
     Raises:
-        Exception: If the request fails
+        Exception: If the request fails after all retries
     """
     # Calculate date range
     end_time = datetime.now()
@@ -112,24 +115,53 @@ def fetch_barrons_articles(api_key, days_back=DEFAULT_DAYS_BACK):
         "to": to_date,
         "sortBy": "date",  # Most recent first
         "showNumResults": "true",
-        "showReprints": "false"
+        "showReprints": "false",
+        "size": 100  # Request up to 100 articles per call
     }
 
-    try:
-        response = requests.get(endpoint, params=params, timeout=REQUEST_TIMEOUT)
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.HTTPError as e:
-        if response.status_code == 401:
-            raise Exception("Authentication failed. Please check your PERIGON_API_KEY.")
-        elif response.status_code == 403:
-            raise Exception("Access forbidden. Your API key may not have access to this endpoint.")
-        else:
-            raise Exception(f"API request failed with status {response.status_code}: {str(e)}")
-    except requests.exceptions.Timeout:
-        raise Exception("API request timed out. Please try again.")
-    except requests.exceptions.RequestException as e:
-        raise Exception(f"API request failed: {str(e)}")
+    # Retry logic with exponential backoff
+    for attempt in range(MAX_RETRIES):
+        try:
+            response = requests.get(endpoint, params=params, timeout=REQUEST_TIMEOUT)
+
+            # Handle rate limiting (503) with retry
+            if response.status_code == 503:
+                if attempt < MAX_RETRIES - 1:
+                    delay = RETRY_DELAY * (2 ** attempt)  # Exponential backoff: 5s, 10s, 20s
+                    print(f"  ⚠️  Rate limit hit (attempt {attempt + 1}/{MAX_RETRIES})")
+                    print(f"  ⏳ Waiting {delay}s before retry...")
+                    time.sleep(delay)
+                    continue
+                else:
+                    raise Exception(f"API rate limit exceeded after {MAX_RETRIES} retries. Please try again later.")
+
+            # Raise for other HTTP errors
+            response.raise_for_status()
+            return response.json()
+
+        except requests.exceptions.HTTPError as e:
+            if response.status_code == 401:
+                raise Exception("Authentication failed. Please check your PERIGON_API_KEY.")
+            elif response.status_code == 403:
+                raise Exception("Access forbidden. Your API key may not have access to this endpoint.")
+            elif response.status_code == 503:
+                # Already handled above, but catch it here too
+                continue
+            else:
+                raise Exception(f"API request failed with status {response.status_code}: {str(e)}")
+        except requests.exceptions.Timeout:
+            if attempt < MAX_RETRIES - 1:
+                delay = RETRY_DELAY * (2 ** attempt)
+                print(f"  ⚠️  Request timeout (attempt {attempt + 1}/{MAX_RETRIES})")
+                print(f"  ⏳ Retrying in {delay}s...")
+                time.sleep(delay)
+                continue
+            raise Exception("API request timed out after multiple retries. Please try again.")
+        except requests.exceptions.RequestException as e:
+            raise Exception(f"API request failed: {str(e)}")
+
+    # If we exhausted all retries
+    raise Exception(f"API request failed after {MAX_RETRIES} retries.")
 
 
 def format_date(date_str):
