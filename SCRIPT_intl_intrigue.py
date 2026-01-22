@@ -5,27 +5,44 @@ International Intrigue Newsletter Fetcher
 Fetches and displays the most recent post from the International Intrigue newsletter
 in a clean, readable terminal format.
 
+Installation:
+    pip install curl_cffi beautifulsoup4 rich html2text
+
 Usage:
     python SCRIPT_intl_intrigue.py              # Show full article (default)
     python SCRIPT_intl_intrigue.py --summary    # Show brief summary only
 
-Prerequisites:
-    pip install curl_cffi beautifulsoup4 rich html2text
+Features:
+    - Automatically fetches the latest post from International Intrigue
+    - Bypasses Cloudflare protection using curl_cffi
+    - Beautiful terminal formatting with rich Markdown rendering
+    - Converts HTML to readable, formatted text with bold/italic support
+    - Shows full article by default with optional --summary flag
+    - No authentication or API keys required
 
-Output:
-    - Post title
-    - Publication date
-    - Article body (formatted for terminal reading)
+Requirements:
+    - Python 3.7+
+    - curl_cffi (for bypassing Cloudflare protection)
+    - beautifulsoup4 (for HTML parsing)
+    - rich (for terminal formatting)
+    - html2text (for HTML to Markdown conversion)
 
-The script:
-    1. Fetches the archive page at https://internationalintrigue.io/archive
-    2. Parses HTML to find the newest post link
+How it works:
+    1. Fetches the archive page at https://archives.internationalintrigue.io/
+    2. Parses HTML to find the newest post link (Beehiiv /p/ pattern)
     3. Fetches the full post content
-    4. Extracts and formats the title, date, and body
-    5. Displays the content using rich formatting for easy reading
+    4. Extracts title, date (from JSON-LD), and article body
+    5. Converts HTML to formatted text with rich markup
+    6. Displays with color, bold, italic, and proper bullet points
+
+Output includes:
+    - Post title (in colored panel)
+    - Publication date (formatted)
+    - Full article body with formatting preserved
 
 Note:
-    No authentication or API keys required. The script directly parses public web pages.
+    May take a few seconds due to Cloudflare protection. If you get a 503 error,
+    simply retry - the bot protection is sometimes temperamental.
 """
 
 import sys
