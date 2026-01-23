@@ -9,6 +9,11 @@
 
 3. **Reflexive Feedback Loops:** Identify stocks where "reflexivity" may lead to price increases/decreases.
    - *Definition:* Feedback loops where investor perception influences price, and price movement in turn alters investor behavior.
+  
+4. **Macroeconomics:** Identify indications of market instability.
+   - **Gold:** Increased allocation to gold, silver, and other commodities.
+   - **Treasury Yields:** Changes and trends in treasure yields and bond prices.
+   - **Economic Indicators:** Significant changes or trends in inflation, consumer sentiment, unemployment rate, etc. 
 
 ## WORKFLOW (MANUAL GATE)
 - **Script Phase:** I will watch you run news and market scripts using the `!` command.
