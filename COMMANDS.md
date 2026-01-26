@@ -1,93 +1,71 @@
 # Commands
 
-## Stock Market Combo
+## Stock Market
+
+Runs losers, Barron's, WSJ, and Reddit. Saves to timestamped file.
 
 ```bash
-python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py
+(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' > "stockmarket_$(date +%Y-%m-%d).txt"
 ```
 
 With Gemini analysis:
 ```bash
-(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | gemini -f ANALYSIS_GUIDELINES.md "analyze per guidelines"
+(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' | tee "stockmarket_$(date +%Y-%m-%d).txt" | gemini -f ANALYSIS_GUIDELINES.md "analyze per guidelines"
 ```
 
 ---
 
-## Scripts
+## Individual Scripts
 
-### Losers/Actives
+### SCRIPT_losers_actives.py
+Biggest stock losers and most active stocks.
 ```bash
 python SCRIPT_losers_actives.py
 ```
-No options. Requires `FMP_API_KEY` and `ALPHAVANTAGE_API_KEY`.
+Requires: `FMP_API_KEY`, `ALPHAVANTAGE_API_KEY`
 
-### Barron's News
+### SCRIPT_barrons_news.py
+Latest Barron's articles via Perigon API.
 ```bash
-python SCRIPT_barrons_news.py
-python SCRIPT_barrons_news.py --count 25
-python SCRIPT_barrons_news.py --days 3
-python SCRIPT_barrons_news.py --all
+python SCRIPT_barrons_news.py [--count N] [--days N] [--all]
 ```
-| Option | Description |
-|--------|-------------|
-| `--count N` | Number of articles (default: 50) |
-| `--days N` | Days back to fetch (default: 1) |
-| `--all` | Show all available articles |
+- `--count N` — Number of articles (default: 50)
+- `--days N` — Days back (default: 1)
+- `--all` — Show all articles
 
-Requires `PERIGON_API_KEY`.
+Requires: `PERIGON_API_KEY`
 
-### WSJ Markets
+### SCRIPT_wsj_markets.py
+WSJ Markets news via RSS.
 ```bash
-python SCRIPT_wsj_markets.py
-python SCRIPT_wsj_markets.py --summary
-python SCRIPT_wsj_markets.py --count 5
+python SCRIPT_wsj_markets.py [--summary] [--count N]
 ```
-| Option | Description |
-|--------|-------------|
-| `--summary` | Headlines only (default: full content) |
-| `--count N` | Number of articles (default: all, or 10 in summary mode) |
+- `--summary` — Headlines only
+- `--count N` — Limit articles
 
-### Reddit Top Posts
+### SCRIPT_reddit_top_posts.py
+Top posts from finance subreddits.
 ```bash
-python SCRIPT_reddit_top_posts.py
-python SCRIPT_reddit_top_posts.py --count 10
-python SCRIPT_reddit_top_posts.py --timeframe week
+python SCRIPT_reddit_top_posts.py [--count N] [--timeframe T]
 ```
-| Option | Description |
-|--------|-------------|
-| `--count N` | Posts per subreddit (default: 15) |
-| `--timeframe` | `hour`, `day`, `week`, `month`, `year`, `all` (default: day) |
+- `--count N` — Posts per subreddit (default: 15)
+- `--timeframe` — hour, day, week, month, year, all (default: day)
 
-### Macro Weekly
+### SCRIPT_macro_weekly.py
+Macro indicators: ETFs, Treasury rates, inflation, unemployment.
 ```bash
 python SCRIPT_macro_weekly.py
 ```
-No options. Takes ~2 min due to API rate limits. Requires `FMP_API_KEY` and `ALPHAVANTAGE_API_KEY`.
+Takes ~2 min (API rate limits). Requires: `FMP_API_KEY`, `ALPHAVANTAGE_API_KEY`
 
-### International Intrigue
+### SCRIPT_intl_intrigue.py
+International Intrigue newsletter.
 ```bash
-python SCRIPT_intl_intrigue.py
-python SCRIPT_intl_intrigue.py --summary
+python SCRIPT_intl_intrigue.py [--summary]
 ```
-| Option | Description |
-|--------|-------------|
-| `--summary` | Brief summary only (default: full article) |
 
-### The Batch
+### SCRIPT_the_batch.py
+The Batch (DeepLearning.AI newsletter).
 ```bash
-python SCRIPT_the_batch.py
-python SCRIPT_the_batch.py --summary
-```
-| Option | Description |
-|--------|-------------|
-| `--summary` | Brief summary only (default: full article) |
-
----
-
-## API Keys
-
-```bash
-export PERIGON_API_KEY="..."      # Barron's
-export FMP_API_KEY="..."          # Losers, Macro
-export ALPHAVANTAGE_API_KEY="..." # Losers, Macro
+python SCRIPT_the_batch.py [--summary]
 ```
