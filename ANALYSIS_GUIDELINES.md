@@ -38,11 +38,3 @@ Prices reflect sentiment, not mathematical risk. Public attitude shapes bids and
 
 **EPS will not grow merely because sales increase.** Sales appears in both numerator and denominator and cancels out. Sustainable earnings growth requires improving returns on sales, improving asset turnover, increasing leverage (limited), or retaining earnings (the only unlimited source). 
 
-## WORKFLOW (MANUAL GATE)
-- **Script Phase:** I will watch you run news and market scripts using the `!` command.
-- **Dialogue Phase:** After each script, I will offer a concise, conversational highlight of items that match our CORE CRITERIA. 
-- **The "Context Lock":** I am forbidden from using tools (`write_file` or `replace`) until you provide a final summary confirmation (e.g., "All context provided. Let's finalize.").
-- **Approval Phase:** Only after the Context Lock is released will I propose a specific Markdown entry for `seeds.txt` for your line-by-line approval.
-- **Deduplication:** Before suggesting an addition, check the existing `@seeds.txt` content to ensure the item isn't already listed for a recent date.
-
- 

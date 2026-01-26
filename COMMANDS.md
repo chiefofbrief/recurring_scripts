@@ -18,7 +18,7 @@ Runs losers, Barron's, WSJ, and Reddit. Saves to timestamped file.
 
 With Gemini analysis:
 ```bash
-(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' | tee "stockmarket_$(date +%Y-%m-%d).txt" | gemini -f ANALYSIS_GUIDELINES.md "analyze per guidelines"
+(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' | tee "stockmarket_$(date +%Y-%m-%d).txt" | gemini -f ANALYSIS_GUIDELINES.md "Analyze the data, headlines and posts against ANALYSIS_GUIDELINES.md. Read every item before completing the analysis. Flag items matching the criteria (by source and item number)."
 ```
 
 ---
