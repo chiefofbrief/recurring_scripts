@@ -1,61 +1,93 @@
 # Commands
 
-## Quick Reference
-
-| Script | Command |
-|--------|---------|
-| Losers/Actives | `python SCRIPT_losers_actives.py` |
-| Barron's | `python SCRIPT_barrons_news.py` |
-| WSJ Markets | `python SCRIPT_wsj_markets.py` |
-| Reddit | `python SCRIPT_reddit_top_posts.py` |
-| Macro Weekly | `python SCRIPT_macro_weekly.py` |
-| Intl Intrigue | `python SCRIPT_intl_intrigue.py` |
-| The Batch | `python SCRIPT_the_batch.py` |
-
-## Multi-Script Commands
-
-### Stock Market (daily check)
-```bash
-python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py --count 20 && python SCRIPT_wsj_markets.py --count 10 && python SCRIPT_reddit_top_posts.py
-```
-
-### Stock Market - Headlines Only (faster)
-```bash
-python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py --count 10 && python SCRIPT_wsj_markets.py --summary && python SCRIPT_reddit_top_posts.py
-```
-
-## Common Options
+## Stock Market Combo
 
 ```bash
-# Barron's
---count N    # Limit articles (default 50)
---days N     # Lookback days (default 1)
---all        # Show all articles
-
-# WSJ
---count N    # Limit articles
---summary    # Headlines only
-
-# Intl Intrigue / The Batch
---summary    # Brief summary only
+python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py
 ```
 
-## API Keys Required
+With Gemini analysis:
+```bash
+(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | gemini -f GEMINI.md "analyze per guidelines"
+```
+
+---
+
+## Scripts
+
+### Losers/Actives
+```bash
+python SCRIPT_losers_actives.py
+```
+No options. Requires `FMP_API_KEY` and `ALPHAVANTAGE_API_KEY`.
+
+### Barron's News
+```bash
+python SCRIPT_barrons_news.py
+python SCRIPT_barrons_news.py --count 25
+python SCRIPT_barrons_news.py --days 3
+python SCRIPT_barrons_news.py --all
+```
+| Option | Description |
+|--------|-------------|
+| `--count N` | Number of articles (default: 50) |
+| `--days N` | Days back to fetch (default: 1) |
+| `--all` | Show all available articles |
+
+Requires `PERIGON_API_KEY`.
+
+### WSJ Markets
+```bash
+python SCRIPT_wsj_markets.py
+python SCRIPT_wsj_markets.py --summary
+python SCRIPT_wsj_markets.py --count 5
+```
+| Option | Description |
+|--------|-------------|
+| `--summary` | Headlines only (default: full content) |
+| `--count N` | Number of articles (default: all, or 10 in summary mode) |
+
+### Reddit Top Posts
+```bash
+python SCRIPT_reddit_top_posts.py
+python SCRIPT_reddit_top_posts.py --count 10
+python SCRIPT_reddit_top_posts.py --timeframe week
+```
+| Option | Description |
+|--------|-------------|
+| `--count N` | Posts per subreddit (default: 15) |
+| `--timeframe` | `hour`, `day`, `week`, `month`, `year`, `all` (default: day) |
+
+### Macro Weekly
+```bash
+python SCRIPT_macro_weekly.py
+```
+No options. Takes ~2 min due to API rate limits. Requires `FMP_API_KEY` and `ALPHAVANTAGE_API_KEY`.
+
+### International Intrigue
+```bash
+python SCRIPT_intl_intrigue.py
+python SCRIPT_intl_intrigue.py --summary
+```
+| Option | Description |
+|--------|-------------|
+| `--summary` | Brief summary only (default: full article) |
+
+### The Batch
+```bash
+python SCRIPT_the_batch.py
+python SCRIPT_the_batch.py --summary
+```
+| Option | Description |
+|--------|-------------|
+| `--summary` | Brief summary only (default: full article) |
+
+---
+
+## API Keys
 
 ```bash
 export PERIGON_API_KEY="..."      # Barron's
 export FMP_API_KEY="..."          # Losers, Macro
 export ALPHAVANTAGE_API_KEY="..." # Losers, Macro
-```
-
-## Gemini Workflow
-
-Pipe script output directly to Gemini with your guidelines:
-```bash
-python SCRIPT_losers_actives.py | gemini -f GEMINI.md "analyze per guidelines"
-```
-
-Or for the full stock market check:
-```bash
-(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py --count 20 && python SCRIPT_wsj_markets.py --count 10 && python SCRIPT_reddit_top_posts.py) 2>&1 | gemini -f GEMINI.md "analyze per guidelines"
 ```
