@@ -1,5 +1,13 @@
 # Commands
 
+## Setup
+
+```bash
+pip install tabulate requests rich curl_cffi beautifulsoup4 html2text lxml python-dateutil
+```
+
+---
+
 ## Stock Market
 
 Runs losers, Barron's, WSJ, and Reddit. Saves to timestamped file.
