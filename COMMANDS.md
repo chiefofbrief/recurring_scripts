@@ -8,7 +8,7 @@ python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIP
 
 With Gemini analysis:
 ```bash
-(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | gemini -f GEMINI.md "analyze per guidelines"
+(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | gemini -f ANALYSIS_GUIDELINES.md "analyze per guidelines"
 ```
 
 ---
