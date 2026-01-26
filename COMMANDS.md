@@ -6,9 +6,21 @@
 python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py
 ```
 
-With Gemini analysis:
+Save to file (for Cloud Shell scrollback issues):
 ```bash
-(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | gemini -f ANALYSIS_GUIDELINES.md "analyze per guidelines"
+(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' > output.txt
+less output.txt
+```
+
+Save to file, then Gemini analysis:
+```bash
+(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' > output.txt
+cat output.txt | gemini -f ANALYSIS_GUIDELINES.md "analyze per guidelines"
+```
+
+Archive with date:
+```bash
+(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' > "stockmarket_$(date +%Y-%m-%d).txt"
 ```
 
 ---
