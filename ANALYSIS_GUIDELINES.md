@@ -2,17 +2,22 @@
 
 ## CORE CRITERIA
 
-1. **Mispricings:** Identify stocks where price diverges from intrinsic value.
+1. **Individual Stocks:** Identify stocks where price diverges from intrinsic value.
 
-   Mispricings concentrate in out-of-favor situations: litigation, scandal, distress, disappointment, management upheaval, and downgrades. The best opportunities combine a high-quality business with a large but solvable one-time problem—quality limits downside while pessimism creates bargain prices. The critical distinction is between temporary problems (which depress prices) and permanent impairments (which justify low valuations).
+   **Mispricing opportunities:** Mispricings concentrate in out-of-favor situations: litigation, scandal, distress, disappointment, management upheaval, and downgrades. The best opportunities combine a high-quality business with a large but solvable one-time problem—quality limits downside while pessimism creates bargain prices. The critical distinction is between temporary problems (which depress prices) and permanent impairments (which justify low valuations).
 
-   Brand name stocks deserve special attention. Because market participants are more likely to hear news about popular companies, these stocks benefit from good news quickly and recover faster than secondary stocks—making them better mispricing candidates when quality remains intact.
+   **Brand name advantage:** Brand name stocks deserve special attention. Because market participants are more likely to hear news about popular companies, these stocks benefit from good news quickly and recover faster than secondary stocks—making them better mispricing candidates when quality remains intact.
 
-   Be skeptical of "glamour" metrics driving price increases. Revenue growth gets headlines, but sales growth alone does not grow EPS—sales appears in both numerator and denominator and cancels out. Sustainable earnings growth requires improving margins, asset turnover, or retained earnings. A stock rising on top-line growth that doesn't translate to earnings improvement is a mispricing candidate when sentiment corrects.
+   **Glamour metrics trap:** Be skeptical of "glamour" metrics driving price increases. Revenue growth gets headlines, but sales growth alone does not grow EPS—sales appears in both numerator and denominator and cancels out. Sustainable earnings growth requires improving margins, asset turnover, or retained earnings. A stock rising on top-line growth that doesn't translate to earnings improvement is a mispricing candidate when sentiment corrects.
 
-   Be aware of reflexivity at the individual stock level: a prevailing bias can validate itself by altering a company's operational reality, such as lowering its cost of capital or inflating the value of its collateral. What appears to be improving "fundamentals" may be an artifact of market sentiment rather than genuine business improvement.
+   **Reflexivity at the stock level:** A prevailing bias can validate itself by altering a company's operational reality, such as lowering its cost of capital or inflating the value of its collateral. What appears to be improving "fundamentals" may be an artifact of market sentiment rather than genuine business improvement.
+
+   **Assume all theses are flawed:** That a thesis is flawed does not mean we should not invest in it—as long as other people believe in it and there is a large group left to be convinced. As Keynes observed, the stock market is a beauty contest where the winner is not the most beautiful contestant but the one whom the greatest number of people consider beautiful. The edge is in looking for the flaws: if we find them, we can limit our losses when the market discovers what we already know. Recognizing the flaws that are likely to appear when a hypothesis becomes reality puts you ahead of the game. It is when we are unaware of what could go wrong that we have to worry.
+
+   **Beware of consensus:** Even a correct forecast provides no edge if the market already discounts it. The current price reflects consensus future prospects—look for where your analysis diverges from what is already priced in, not merely where it diverges from current conditions.
 
 2. **Macroeconomics:** Monitor market conditions and identify instability.
+
    - **Gold:** Increased allocation to gold, silver, and other commodities.
    - **Treasury Yields:** Changes and trends in treasury yields and bond prices.
    - **Economic Indicators:** Significant changes or trends in inflation, consumer sentiment, unemployment rate, etc.
@@ -31,12 +36,3 @@
    - **Applications:** Must generate revenue to support all underlying layers. Benefits most from infrastructure buildout—as compute prices decline, startups (consumers of compute) gain advantage.
 
    **Key dynamic:** Current infrastructure investment requires massive application-layer revenue to be justified. The subsidy flows downward, but returns must flow upward.
-
-## CORE INSIGHTS
-
-Prices reflect sentiment, not mathematical risk. Public attitude shapes bids and offers, which determine price. This sentiment-driven pricing creates opportunities when popularity diverges from value—but it also means returns are not inherent to asset classes. They result from fundamentals *and* the price paid.
-
-**The two hazards of forecasting:** (1) the forecast may be wrong, and (2) even if correct, it may already be priced in. The current market price reflects consensus future prospects—an accurate forecast provides no edge if the market already discounts it.
-
-**Assume all investment theses are flawed.** That a thesis is flawed does not mean we should not invest in it—as long as other people believe in it and there is a large group left to be convinced. As Keynes observed, the stock market is a beauty contest where the winner is not the most beautiful contestant but the one whom the greatest number of people consider beautiful. The edge is in looking for the flaws: if we find them, we can limit our losses when the market discovers what we already know. Recognizing the flaws that are likely to appear when a hypothesis becomes reality puts you ahead of the game. It is when we are unaware of what could go wrong that we have to worry.
-
