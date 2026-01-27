@@ -10,15 +10,15 @@ pip install tabulate requests rich curl_cffi beautifulsoup4 html2text lxml pytho
 
 ## Stock Market
 
-Runs losers, Barron's, WSJ, and Reddit. Saves to timestamped file.
+Runs losers, Barron's, WSJ, and Reddit. Saves to timestamped file with Gemini analysis prepended.
 
 ```bash
-(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' > "stockmarket_$(date +%Y-%m-%d).txt"
+FILE="stockmarket_$(date +%Y-%m-%d).txt" && (python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' > "$FILE" && { gemini -f ANALYSIS_GUIDELINES.md "Analyze the data, headlines and posts against ANALYSIS_GUIDELINES.md. Read every item before completing the analysis. Flag items matching the criteria (by source and item number)." < "$FILE"; echo -e "\n---\n"; cat "$FILE"; } > "${FILE}.tmp" && mv "${FILE}.tmp" "$FILE"
 ```
 
-With Gemini analysis:
+Without analysis:
 ```bash
-(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' | tee "stockmarket_$(date +%Y-%m-%d).txt" | gemini -f ANALYSIS_GUIDELINES.md "Analyze the data, headlines and posts against ANALYSIS_GUIDELINES.md. Read every item before completing the analysis. Flag items matching the criteria (by source and item number)."
+(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' > "stockmarket_$(date +%Y-%m-%d).txt"
 ```
 
 ---
