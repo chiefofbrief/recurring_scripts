@@ -9,21 +9,23 @@ Installation:
     pip install curl_cffi beautifulsoup4 rich html2text lxml
 
 Usage:
-    python SCRIPT_wsj_markets.py                    # Show all articles with full content (default)
-    python SCRIPT_wsj_markets.py --summary          # Show top 10 headlines only
+    python SCRIPT_wsj_markets.py                    # Show 50 articles from past 1 day with full content (default)
+    python SCRIPT_wsj_markets.py --summary          # Show top 10 headlines from past 1 day
     python SCRIPT_wsj_markets.py --count 3          # Show top 3 articles with full content
     python SCRIPT_wsj_markets.py --summary --count 15  # Show top 15 headlines
-    python SCRIPT_wsj_markets.py --days 1           # Filter to articles from past 1 day (today + yesterday)
-    python SCRIPT_wsj_markets.py --days 0           # Filter to articles from today only
+    python SCRIPT_wsj_markets.py --days 0           # Filter to today only
+    python SCRIPT_wsj_markets.py --days 7           # Filter to articles from past 7 days
+    python SCRIPT_wsj_markets.py --days 999         # Show all available articles (no date filtering)
 
 Features:
     - Automatically fetches the latest market news from WSJ RSS feed
     - Bypasses potential restrictions using curl_cffi
     - Beautiful terminal formatting with rich markup
     - Converts HTML descriptions to readable, formatted text
-    - Shows all articles by default with optional --summary flag for headlines only
+    - Defaults to 50 articles from past 1 day (today + yesterday)
+    - Optional --summary flag for headlines only (top 10)
     - Configurable article count with --count flag
-    - Date filtering with --days flag to avoid duplicate articles in daily aggregation
+    - Date filtering with --days flag (default: 1 day)
     - No authentication or API keys required
 
 Requirements:
@@ -76,6 +78,8 @@ except ImportError:
 RSS_FEED_URL = "https://feeds.content.dowjones.io/public/rss/RSSMarketsMain"
 REQUEST_TIMEOUT = 30  # seconds
 DEFAULT_SUMMARY_COUNT = 10  # Number of headlines to show in summary mode
+DEFAULT_DAYS = 1  # Default number of days to filter articles (today + yesterday)
+DEFAULT_COUNT = 50  # Default number of articles in full mode
 
 # ============================================================================
 # HELPER FUNCTIONS
@@ -417,12 +421,14 @@ def main():
     parser.add_argument(
         '--count',
         type=int,
-        help=f'Number of articles to display (default: all articles for full mode, {DEFAULT_SUMMARY_COUNT} for summary)'
+        default=DEFAULT_COUNT,
+        help=f'Number of articles to display (default: {DEFAULT_COUNT} for full mode, {DEFAULT_SUMMARY_COUNT} for summary)'
     )
     parser.add_argument(
         '--days',
         type=int,
-        help='Filter articles to only include those from the past N days (e.g., --days 1 for today + yesterday). Default: no filtering'
+        default=DEFAULT_DAYS,
+        help=f'Filter articles to only include those from the past N days (default: {DEFAULT_DAYS} for today + yesterday)'
     )
     args = parser.parse_args()
 

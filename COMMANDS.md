@@ -71,8 +71,8 @@ WSJ Markets news via RSS.
 python SCRIPT_wsj_markets.py [--summary] [--count N] [--days N]
 ```
 - `--summary` — Headlines only
-- `--count N` — Limit articles
-- `--days N` — Filter to articles from past N days (e.g., `--days 1` for today + yesterday)
+- `--count N` — Limit articles (default: 50)
+- `--days N` — Filter to articles from past N days (default: 1 for today + yesterday)
 
 ### SCRIPT_reddit_top_posts.py
 Top posts from finance subreddits.
