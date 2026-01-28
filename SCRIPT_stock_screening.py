@@ -13,6 +13,8 @@ Metrics calculated (same stat block for each):
 - Operating Margin Trend (derived from income statement, no extra API call)
 - P/E Trend (derived from price + EPS, no extra API call)
 - EPS/Revenue Estimates (consensus, range, revisions)
+- Price-EPS Correlation (5yr annual data)
+- YoY Trend Analysis (quarterly and annual YoY % changes for all metrics)
 
 API Budget: 4 calls per stock
 - TIME_SERIES_MONTHLY_ADJUSTED
@@ -130,6 +132,37 @@ def detect_outliers(values):
     std_dev = variance ** 0.5
     lower, upper = mean - 2 * std_dev, mean + 2 * std_dev
     return [i for i, v in clean if v < lower or v > upper]
+
+def calculate_correlation(values1, values2):
+    """Calculate Pearson correlation coefficient between two value lists.
+
+    Returns correlation coefficient (-1 to +1) or None if insufficient data.
+    Matches values by index, skipping any pairs where either value is None.
+    """
+    if not values1 or not values2:
+        return None
+
+    # Pair up values, filter out any pairs with None
+    paired = [(v1, v2) for v1, v2 in zip(values1, values2) if v1 is not None and v2 is not None]
+
+    if len(paired) < 2:
+        return None
+
+    n = len(paired)
+    sum_x = sum(x for x, _ in paired)
+    sum_y = sum(y for _, y in paired)
+    sum_xy = sum(x * y for x, y in paired)
+    sum_x2 = sum(x * x for x, _ in paired)
+    sum_y2 = sum(y * y for _, y in paired)
+
+    numerator = n * sum_xy - sum_x * sum_y
+    denominator = ((n * sum_x2 - sum_x ** 2) * (n * sum_y2 - sum_y ** 2)) ** 0.5
+
+    if denominator == 0:
+        return None
+
+    correlation = numerator / denominator
+    return round(correlation, 3)
 
 
 def fmt_val(val, unit='', is_delta=False):
@@ -643,6 +676,202 @@ def calculate_estimates_stats(estimates_data, earnings_data):
         'all_estimates': parsed
     }
 
+
+def build_yoy_trend_data(price_data, earnings_data, income_data):
+    """Build YoY % change trend data for Price, EPS, Revenue, and Operating Margin.
+
+    Combines both quarterly and annual data points for comprehensive trend view.
+    Returns list of data points sorted chronologically, each containing:
+    - date: fiscal date
+    - period_type: 'Q' or 'A' (quarterly or annual)
+    - price_yoy: YoY % change in price
+    - eps_yoy: YoY % change in EPS
+    - revenue_yoy: YoY % change in revenue
+    - margin_yoy: YoY percentage point change in operating margin
+    """
+    trend_points = []
+
+    if not earnings_data or not income_data:
+        return trend_points
+
+    # Get quarterly data
+    quarterly_earnings = earnings_data.get('quarterlyEarnings', [])
+    quarterly_income = income_data.get('quarterlyReports', [])
+
+    # Get monthly price data
+    price_monthly = {}
+    if price_data:
+        time_series = price_data.get('Monthly Adjusted Time Series', {})
+        for date_str, values in time_series.items():
+            close = safe_float(values.get('5. adjusted close'))
+            if close is not None:
+                price_monthly[date_str] = close
+
+    # Build quarterly trend points (YoY = compare to 4 quarters ago)
+    for i in range(len(quarterly_earnings) - 4):
+        current_q = quarterly_earnings[i]
+        yoy_q = quarterly_earnings[i + 4]
+
+        date = current_q.get('fiscalDateEnding')
+        if not date:
+            continue
+
+        point = {
+            'date': date,
+            'period_type': 'Q',
+            'price_yoy': None,
+            'eps_yoy': None,
+            'revenue_yoy': None,
+            'margin_yoy': None
+        }
+
+        # EPS YoY
+        current_eps = safe_float(current_q.get('reportedEPS'))
+        yoy_eps = safe_float(yoy_q.get('reportedEPS'))
+        if current_eps is not None and yoy_eps is not None and yoy_eps != 0:
+            point['eps_yoy'] = round(((current_eps - yoy_eps) / abs(yoy_eps)) * 100, 2)
+
+        # Find matching quarterly income report
+        current_income = None
+        yoy_income = None
+        for j, inc in enumerate(quarterly_income):
+            if inc.get('fiscalDateEnding') == date:
+                current_income = inc
+                # YoY income is 4 quarters later
+                if j + 4 < len(quarterly_income):
+                    yoy_income = quarterly_income[j + 4]
+                break
+
+        if current_income and yoy_income:
+            # Revenue YoY
+            current_rev = safe_float(current_income.get('totalRevenue'))
+            yoy_rev = safe_float(yoy_income.get('totalRevenue'))
+            if current_rev is not None and yoy_rev is not None and yoy_rev != 0:
+                point['revenue_yoy'] = round(((current_rev - yoy_rev) / abs(yoy_rev)) * 100, 2)
+
+            # Operating Margin YoY (percentage point change)
+            current_margin = pct(
+                safe_float(current_income.get('operatingIncome')),
+                current_rev
+            )
+            yoy_margin = pct(
+                safe_float(yoy_income.get('operatingIncome')),
+                yoy_rev
+            )
+            if current_margin is not None and yoy_margin is not None:
+                point['margin_yoy'] = round(current_margin - yoy_margin, 2)
+
+        # Price YoY - find price closest to fiscal date
+        # Try exact match first, then month match
+        price_current = None
+        price_yoy = None
+
+        # Extract year-month from fiscal date
+        year_month = date[:7]  # YYYY-MM
+        year = int(date[:4])
+        yoy_year_month = f"{year - 1}{date[4:7]}"
+
+        # Try to find prices
+        if year_month in price_monthly:
+            price_current = price_monthly[year_month]
+        if yoy_year_month in price_monthly:
+            price_yoy = price_monthly[yoy_year_month]
+
+        # If exact month not found, try nearby months
+        if price_current is None:
+            for offset in ['-01', '-02', '-03']:
+                test_date = year_month + offset
+                if test_date in price_monthly:
+                    price_current = price_monthly[test_date]
+                    break
+
+        if price_yoy is None:
+            for offset in ['-01', '-02', '-03']:
+                test_date = yoy_year_month + offset
+                if test_date in price_monthly:
+                    price_yoy = price_monthly[test_date]
+                    break
+
+        if price_current is not None and price_yoy is not None and price_yoy != 0:
+            point['price_yoy'] = round(((price_current - price_yoy) / abs(price_yoy)) * 100, 2)
+
+        trend_points.append(point)
+
+    # Build annual trend points
+    annual_earnings = earnings_data.get('annualEarnings', [])
+    annual_income = income_data.get('annualReports', [])
+
+    for i in range(len(annual_earnings) - 1):
+        current_a = annual_earnings[i]
+        yoy_a = annual_earnings[i + 1]
+
+        date = current_a.get('fiscalDateEnding')
+        if not date:
+            continue
+
+        point = {
+            'date': date,
+            'period_type': 'A',
+            'price_yoy': None,
+            'eps_yoy': None,
+            'revenue_yoy': None,
+            'margin_yoy': None
+        }
+
+        # EPS YoY
+        current_eps = safe_float(current_a.get('reportedEPS'))
+        yoy_eps = safe_float(yoy_a.get('reportedEPS'))
+        if current_eps is not None and yoy_eps is not None and yoy_eps != 0:
+            point['eps_yoy'] = round(((current_eps - yoy_eps) / abs(yoy_eps)) * 100, 2)
+
+        # Find matching annual income report
+        current_income = None
+        yoy_income = None
+        for j, inc in enumerate(annual_income):
+            if inc.get('fiscalDateEnding') == date:
+                current_income = inc
+                if j + 1 < len(annual_income):
+                    yoy_income = annual_income[j + 1]
+                break
+
+        if current_income and yoy_income:
+            # Revenue YoY
+            current_rev = safe_float(current_income.get('totalRevenue'))
+            yoy_rev = safe_float(yoy_income.get('totalRevenue'))
+            if current_rev is not None and yoy_rev is not None and yoy_rev != 0:
+                point['revenue_yoy'] = round(((current_rev - yoy_rev) / abs(yoy_rev)) * 100, 2)
+
+            # Operating Margin YoY
+            current_margin = pct(
+                safe_float(current_income.get('operatingIncome')),
+                current_rev
+            )
+            yoy_margin = pct(
+                safe_float(yoy_income.get('operatingIncome')),
+                yoy_rev
+            )
+            if current_margin is not None and yoy_margin is not None:
+                point['margin_yoy'] = round(current_margin - yoy_margin, 2)
+
+        # Price YoY - use December close for annual
+        year = date[:4]
+        yoy_year = str(int(year) - 1)
+        dec_current = f"{year}-12"
+        dec_yoy = f"{yoy_year}-12"
+
+        price_current = price_monthly.get(dec_current)
+        price_yoy = price_monthly.get(dec_yoy)
+
+        if price_current is not None and price_yoy is not None and price_yoy != 0:
+            point['price_yoy'] = round(((price_current - price_yoy) / abs(price_yoy)) * 100, 2)
+
+        trend_points.append(point)
+
+    # Sort chronologically (oldest first)
+    trend_points.sort(key=lambda x: x['date'])
+
+    return trend_points
+
 # ============================================================================
 # REPORT GENERATION
 # ============================================================================
@@ -687,6 +916,37 @@ def build_annual_table(years, values, unit, current_label=None, current_val=None
         row_vals.append(fmt_val(current_val, unit))
 
     return headers, row_vals
+
+
+def generate_yoy_trend_chart(trend_points):
+    """Generate a markdown table showing YoY % change trends for all metrics.
+
+    Args:
+        trend_points: List of trend data points from build_yoy_trend_data
+
+    Returns:
+        String containing markdown-formatted table
+    """
+    if not trend_points:
+        return "*Insufficient data for YoY trend chart*"
+
+    # Limit to most recent data points (last 20 for readability)
+    display_points = trend_points[-20:] if len(trend_points) > 20 else trend_points
+
+    headers = ["Period", "Date", "Price YoY %", "EPS YoY %", "Revenue YoY %", "Op Margin YoY pp"]
+    rows = []
+
+    for point in display_points:
+        rows.append([
+            point['period_type'],
+            point['date'],
+            fmt_val(point.get('price_yoy'), 'percent', True),
+            fmt_val(point.get('eps_yoy'), 'percent', True),
+            fmt_val(point.get('revenue_yoy'), 'percent', True),
+            fmt_val(point.get('margin_yoy'), 'percent', True)
+        ])
+
+    return tabulate(rows, headers=headers, tablefmt="pipe")
 
 
 def generate_screening_report(tickers, all_results):
@@ -784,6 +1044,25 @@ def generate_screening_report(tickers, all_results):
             lines.append("**P/E:** —")
         lines.append("")
 
+        # Price-EPS Correlation
+        price_eps_corr = results.get('price_eps_correlation')
+        if price_eps_corr is not None:
+            # Interpret correlation
+            if price_eps_corr >= 0.7:
+                interp = "Strong positive"
+            elif price_eps_corr >= 0.3:
+                interp = "Moderate positive"
+            elif price_eps_corr >= -0.3:
+                interp = "Weak"
+            elif price_eps_corr >= -0.7:
+                interp = "Moderate negative"
+            else:
+                interp = "Strong negative"
+            lines.append(f"**Price-EPS Correlation (5yr):** {price_eps_corr} ({interp})")
+        else:
+            lines.append("**Price-EPS Correlation (5yr):** —")
+        lines.append("")
+
         # Estimates summary line
         if estimates:
             nq = estimates.get('next_quarter')
@@ -799,6 +1078,16 @@ def generate_screening_report(tickers, all_results):
         else:
             lines.append("**Estimates:** —")
         lines.append("")
+
+        # YoY Trend Chart
+        yoy_trend = results.get('yoy_trend', [])
+        if yoy_trend:
+            lines.append("### YoY Trend Analysis")
+            lines.append("")
+            lines.append("*Year-over-year % changes (Quarterly and Annual). Shows whether metrics are moving together.*")
+            lines.append("")
+            lines.append(generate_yoy_trend_chart(yoy_trend))
+            lines.append("")
 
         # ==== PRICE TREND ====
         lines.append("### Price Trend")
@@ -1087,6 +1376,22 @@ def main():
         results['pe'] = calculate_pe_stats(results['price'], results['eps'])
         results['estimates'] = calculate_estimates_stats(
             data.get('earnings_estimates'), data.get('earnings')
+        )
+
+        # Calculate EPS-Price correlation
+        price_corr = None
+        if results['price'] and results['eps']:
+            price_annual = results['price'].get('annual_values', [])
+            eps_annual = results['eps'].get('annual_values', [])
+            if price_annual and eps_annual:
+                price_corr = calculate_correlation(price_annual, eps_annual)
+        results['price_eps_correlation'] = price_corr
+
+        # Build YoY trend data
+        results['yoy_trend'] = build_yoy_trend_data(
+            data.get('price_monthly'),
+            data.get('earnings'),
+            data.get('income')
         )
 
         all_results[ticker] = results
