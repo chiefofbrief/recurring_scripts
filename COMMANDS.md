@@ -23,15 +23,17 @@ Runs losers, Barron's, WSJ, and Reddit. Saves to timestamped file.
 ```
 Review all headlines and posts in @stockmarket_YYYY-MM-DD.txt. Analyze using @ANALYSIS_GUIDELINES.md, providing a comprehensive but concise analysis.
 
+CRITICAL: Provide source citations (source, item #) for every observation, stock mention, and claim. Format: (Barron's #3, WSJ #12, r/ValueInvesting #5). Do not make any claim without citing the specific source item number.
+
 Structure your analysis as follows:
 
-1. **Market Overview:** Open with a paragraph setting context—identify key market conditions, contradictions (e.g., record highs alongside safe-haven flows), and the overall risk environment.
+1. **Market Overview:** Open with a paragraph setting context—identify key market conditions, contradictions (e.g., record highs alongside safe-haven flows), and the overall risk environment. Cite sources for each observation.
 
-2. **Individual Stocks:** Apply the conceptual framework explicitly. Use terms like "mispricing opportunities," "brand name advantage," "glamour metrics trap," and distinguish between temporary problems (creating bargains) and permanent impairments (justifying low prices).
+2. **Individual Stocks:** Apply the conceptual framework explicitly. Use terms like "mispricing opportunities," "brand name advantage," "glamour metrics trap," and distinguish between temporary problems (creating bargains) and permanent impairments (justifying low prices). Cite the specific source for each stock mentioned.
 
-3. **Macroeconomics:** Monitor market conditions and instability. Cover gold/commodities allocation, treasury yields, economic indicators, and watch for reflexive boom/bust patterns.
+3. **Macroeconomics:** Monitor market conditions and instability. Cover gold/commodities allocation, treasury yields, economic indicators, and watch for reflexive boom/bust patterns. Cite sources for all data points.
 
-4. **AI Ecosystem:** Break down by layers (Compute & Chips, Infrastructure, Models & Tools, Applications). Identify specific stocks and dynamics at each layer.
+4. **AI Ecosystem:** Break down by layers (Compute & Chips, Infrastructure, Models & Tools, Applications). Identify specific stocks and dynamics at each layer. Cite sources for each mention.
 
 5. **Screening Candidates:** List stocks (ticker symbols) that warrant deeper fundamental analysis. Provide brief investigation rationale for each. You may suggest more than 5 candidates, but note that only 1-5 will be selected for screening.
 
@@ -39,8 +41,6 @@ Format:
 **Screening Candidates:**
 - TICKER: rationale for investigation
 - TICKER: rationale for investigation
-
-Include citations throughout (e.g., Barron's #3, WSJ #12, r/ValueInvesting #5).
 
 Append the analysis to the top of @stockmarket_YYYY-MM-DD.txt
 ```
