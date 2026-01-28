@@ -23,12 +23,24 @@ Runs losers, Barron's, WSJ, and Reddit. Saves to timestamped file.
 ```
 Review all headlines and posts in @stockmarket_YYYY-MM-DD.txt. Analyze using @ANALYSIS_GUIDELINES.md, providing a comprehensive but concise analysis.
 
-At the end of your analysis, include a "Screening Candidates" section listing stocks (ticker symbols) that warrant deeper fundamental analysis. Provide brief rationale for each. You may suggest more than 5 candidates, but note that only 1-5 will be selected for screening.
+Structure your analysis as follows:
+
+1. **Market Overview:** Open with a paragraph setting context—identify key market conditions, contradictions (e.g., record highs alongside safe-haven flows), and the overall risk environment.
+
+2. **Individual Stocks:** Apply the conceptual framework explicitly. Use terms like "mispricing opportunities," "brand name advantage," "glamour metrics trap," and distinguish between temporary problems (creating bargains) and permanent impairments (justifying low prices).
+
+3. **Macroeconomics:** Monitor market conditions and instability. Cover gold/commodities allocation, treasury yields, economic indicators, and watch for reflexive boom/bust patterns.
+
+4. **AI Ecosystem:** Break down by layers (Compute & Chips, Infrastructure, Models & Tools, Applications). Identify specific stocks and dynamics at each layer.
+
+5. **Screening Candidates:** List stocks (ticker symbols) that warrant deeper fundamental analysis. Provide brief investigation rationale for each. You may suggest more than 5 candidates, but note that only 1-5 will be selected for screening.
 
 Format:
 **Screening Candidates:**
-- TICKER: rationale
-- TICKER: rationale
+- TICKER: rationale for investigation
+- TICKER: rationale for investigation
+
+Include citations throughout (e.g., Barron's #3, WSJ #12, r/ValueInvesting #5).
 
 Append the analysis to the top of @stockmarket_YYYY-MM-DD.txt
 ```
