@@ -23,9 +23,7 @@ Runs losers, Barron's, WSJ, and Reddit. Saves to timestamped file.
 ```
 Review all headlines and posts in @stockmarket_YYYY-MM-DD.txt. Analyze using @ANALYSIS_GUIDELINES.md, providing a comprehensive but concise analysis.
 
-Start with a Market Overview paragraph to set context and identify key market conditions.
-
-Organize analysis into three sections: Individual Stocks, Macroeconomics, and AI Ecosystem. Apply the conceptual framework from the guidelines (mispricing opportunities, brand name advantage, glamour metrics trap, etc.).
+Start with a Market Overview paragraph to set context. Apply the conceptual framework from the guidelines (mispricing opportunities, brand name advantage, glamour metrics trap, temporary vs. permanent problems, etc.). Focus on what's relevant: individual stocks, macroeconomic conditions, or AI ecosystem developments.
 
 CRITICAL: Cite sources throughout using format (Barron's #3, WSJ #12, r/ValueInvesting #5).
 
