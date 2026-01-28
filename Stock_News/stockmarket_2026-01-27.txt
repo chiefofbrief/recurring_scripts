@@ -1,0 +1,1630 @@
+AI Analysis:
+
+Individual Stocks:
+- Mispricing Opportunities:
+    - Health Insurance Sector (UNH, HUM, CVS, ELV): Significant drops (14-20%) due to proposed flat Medicare rates (Barron's #3, WSJ #1, r/ValueInvesting #2, #3, #4, #6). These are "brand name" stocks experiencing a "one-time problem" with debate on whether it's temporary or permanent.
+    - Commvault Systems (CVLT): Down ~29%. A software company with a notable drop, potentially indicating a mispricing opportunity.
+    - Booz Allen Hamilton (BAH): Contract cancellation due to scandal (r/stocks #1), creating a potential "mispricing opportunity" if the impact is temporary.
+- Glamour Metrics Trap:
+    - Regencell Bioscience (RGC): A $14B meme stock with no revenue (WSJ #5), driven by narrative rather than fundamentals.
+
+Macroeconomics:
+- Gold & Silver: Gold surged past $5,000 (Barron's #40, WSJ #50, #7, #29) and silver saw a "parabolic rally" (Barron's #25, r/stocks #3, #9). This reflects increased allocation to commodities, suggesting market fear and instability, acting as a "fear index" (Barron's #31).
+- Treasury Yields & Currency: Discussions around U.S.-Japan intervention to support the Yen and Fed rate expectations are causing dollar weakness and impacting Treasury yields (Barron's #8, #11, #21, #34, WSJ #18, #39, #40, #41, #42, #43). This highlights global financial instability.
+- Market Sentiment: S&P 500 is near record highs (Barron's #12), but underlying anxieties exist due to government shutdown fears, tariffs, and currency interventions, suggesting a "cautionary posture" is warranted (Barron's #7, #35, r/stocks #2).
+
+AI Ecosystem:
+- Compute & Chips:
+    - Nvidia (NVDA): Dominant, but competition is emerging. Microsoft (MSFT) unveiled its in-house AI chip "Maia 200" (Barron's #2, r/stocks #5), showcasing "custom chip development reducing Nvidia dependence." Samsung supplying Nvidia affects Micron (MU) (Barron's #41). IonQ is acquiring a chipmaker (Barron's #28).
+- Infrastructure:
+    - CoreWeave (CRWV): Nvidia's $2B investment (WSJ #19, Barron's #29) highlights the growth in AI infrastructure. Prologis (PLD) as a data center play (Barron's #22) shows the broader impact.
+- Models & Tools:
+    - Zoom's (ZM) Anthropic stake's valuation (Barron's #23) indicates high value in foundation models.
+- Applications:
+    - Cloudflare (NET): Stock rise due to an AI bot (Barron's #1) demonstrates application-layer success driven by underlying infrastructure.
+
+================================================================================
+MARKET LOSERS & MOST ACTIVES DATA FETCHER
+================================================================================
+
+Fetching data from FMP...
+  ✓ Fetched 50 losers from FMP
+Fetching data from AlphaVantage...
+  ✓ Fetched 20 losers from AlphaVantage
+Fetching most actives from FMP...
+  ✓ Fetched 50 most actives from FMP
+
+Processing losers data...
+
+================================================================================
+BIGGEST STOCK LOSERS (Price ≥ $1)
+================================================================================
+Symbol    Price    Change %    Company Name                              Source
+--------  -------  ----------  ----------------------------------------  ------------
+UOKA      $1.32    -40.32%     MDJM Ltd                                  FMP
+NVNI      $1.76    -39.52%     N/A                                       AlphaVantage
+RVMDW     $1.95    -38.39%     N/A                                       AlphaVantage
+AVX       $1.09    -37.11%     AgriFORCE Growing Systems Ltd.            FMP
+*NBY      $2.02    -36.03%     NovaBay Pharmaceuticals, Inc.             FMP
+GAUZ      $1.12    -35.34%     Gauzy Ltd. Ordinary Shares                FMP
+*DOGZ     $1.79    -33.73%     Dogness (International) Corporation       FMP
+CRDF      $2.02    -31.29%     Cardiff Oncology, Inc.                    FMP
+*HCHL     $1.53    -30.45%     Happy City Holdings Limited Class A Ordi  FMP
+CVLT      $91.37   -29.37%     Commvault Systems, Inc.                   FMP
+MBAI      $2.24    -29.11%     Check-Cap Ltd. Ordinary Share             FMP
+BATL      $2.87    -28.07%     Battalion Oil Corporation                 FMP
+NIVF      $1.36    -26.88%     NewGenIvf Group Limited                   FMP
+FLYT      $15.55   -26.82%     N/A                                       AlphaVantage
+EMAT      $7.00    -26.62%     N/A                                       AlphaVantage
+IVF       $1.21    -25.77%     N/A                                       AlphaVantage
+IOTR      $3.96    -25.70%     N/A                                       AlphaVantage
+DCX       $3.53    -25.68%     N/A                                       AlphaVantage
+CJMB      $2.20    -22.26%     CALLAN JMB INC.                           FMP
+AKAN      $1.42    -21.55%     Akanda Corp.                              FMP
+SLND      $1.88    -21.34%     Southland Holdings, Inc.                  FMP
+SWVL      $1.80    -21.27%     Swvl Holdings Corp.                       FMP
+ASTH      $21.45   -21.20%     Astrana Health, Inc.                      FMP
+HUM       $209.62  -20.49%     Humana Inc.                               FMP
+LUD       $7.18    -20.22%     Luda Technology Group Limited             FMP
+SANM      $145.70  -20.18%     Sanmina Corporation                       FMP
+AGYS      $90.66   -20.16%     Agilysys, Inc.                            FMP
+SBDS      $7.12    -20.06%     Solo Brands, Inc.                         FMP
+SLGB      $1.98    -20.03%     Smart Logistics Global Limited Ordinary   FMP
+BNAI      $49.74   -19.87%     Brand Engagement Network, Inc.            FMP
+►UNH      $282.02  -19.80%     UnitedHealth Group Incorporated           FMP
+WRLD      $115.55  -18.96%     World Acceptance Corporation              FMP
+CARV      $1.53    -18.62%     Carver Bancorp, Inc.                      FMP
+NFE       $1.40    -18.60%     New Fortress Energy Inc.                  FMP
+XXII      $9.32    -17.60%     22nd Century Group, Inc.                  FMP
+LVLU      $19.40   -16.92%     Lulu's Fashion Lounge Holdings, Inc.      FMP
+XCUR      $4.22    -16.44%     Exicure, Inc.                             FMP
+DRMA      $2.58    -16.23%     Dermata Therapeutics, Inc.                FMP
+RDTL      $35.18   -15.70%     GraniteShares 2x Long RDDT Daily ETF      FMP
+ALHC      $20.20   -15.16%     Alignment Healthcare, Inc.                FMP
+►CVS      $71.34   -14.94%     CVS Health Corporation                    FMP
+AZI       $2.22    -14.94%     Autozi Internet Technology (Global) Ltd.  FMP
+LRHC      $3.17    -14.78%     La Rosa Holdings Corp.                    FMP
+LFS       $3.04    -14.12%     LEIFRAS Co., Ltd. American Depositary Sh  FMP
+KNRX      $1.28    -14.09%     KNOREX LTD.                               FMP
+ELV       $324.66  -13.87%     Elevance Health Inc.                      FMP
+
+--------------------------------------------------------------------------------
+Total stocks: 67 | Displayed: 46 | Filtered (<$1): 21
+In both APIs: 3 (marked with *)
+High volume: 2 (marked with ►)
+--------------------------------------------------------------------------------
+
+
+Processing most actives data...
+
+================================================================================
+MOST ACTIVELY TRADED STOCKS (Price ≥ $1)
+================================================================================
+Symbol    Price    Change %    Company Name
+--------  -------  ----------  --------------------------------------------------
+ZSL       $1.91    2.69%       ProShares UltraShort Silver
+SOXS       $1.90    -7.77%      Direxion Daily Semiconductor Bear 3X Shares
+SLV       $96.96   -1.40%      iShares Silver Trust
+RR        $5.30    39.11%      Richtech Robotics Inc. Class B Common Stock
+NUWE      $3.90    81.40%      Nuwellis, Inc.
+XHLD      $2.62    106.69%     TEN Holdings, Inc. Common Stock
+NVDA      $189.47  1.61%       NVIDIA Corporation
+INTC      $43.91   3.34%       Intel Corporation
+CYN       $2.21    6.25%       Cyngn Inc.
+TZA       $6.11    0.16%       Direxion Daily Small Cap Bear 3X Shares
+DUST      $4.69    0.86%       Direxion Daily Gold Miners Index Bear 2X Shares
+ONDS      $12.19   9.18%       Ondas Holdings Inc.
+AAL       $13.95   -4.29%      American Airlines Group Inc.
+F         $13.86   3.09%       Ford Motor Company
+PLUG      $2.35    2.39%       Plug Power Inc.
+GNTA      $1.36    4.62%       Genenta Science S.p.A.
+PFE       $26.47   2.28%       Pfizer Inc.
+BBAI      $6.04    5.51%       BigBear.ai Holdings, Inc.
+UNH       $282.02  -19.80%     UnitedHealth Group Incorporated
+GITS      $4.60    140.73%     Global Interactive Technologies, Inc.
+KVUE      $17.64   0.03%       Kenvue Inc.
+HIND      $3.23    3.86%       Vyome Holdings, Inc.
+BITO      $12.17   0.24%       ProShares Bitcoin Strategy ETF
+EWZ       $37.77   3.15%       iShares MSCI Emerging Markets ETF
+BBD       $4.13    4.03%       Banco Bradesco S.A.
+TQQQ      $56.59   2.73%       ProShares UltraPro QQQ
+SOXL      $65.61   8.09%       Direxion Daily Semiconductor Bull 3X Shares
+EEM       $60.16   1.66%       iShares MSCI Emerging Markets ETF
+GRAB      $4.76    4.39%       Grab Holdings Limited
+USAR      $26.06   -2.47%      USA Rare Earth Inc
+IBIT      $49.76   0.21%       iShares Bitcoin Trust
+JDST      $1.60    0.94%       Direxion Daily Junior Gold Miners Index Bear 2X Sh
+CRWV      $109.61  11.49%      CoreWeave, Inc. Class A Common Stock
+MSTX      $3.97    -2.63%      Defiance Daily Target 2X Long MSTR ETF
+TSLS      $5.25    0.57%       Direxion Daily TSLA Bear 1X Shares
+APLD      $40.83   12.84%      Applied Digital Corporation
+PHGE      $6.82    66.34%      BiomX Inc.
+CRWG      $6.00    23.19%      Leverage Shares 2X Long CRWV Daily ETF
+IREN      $57.02   8.90%       IREN Limited
+SPY       $695.88  0.46%       SPDR S&P 500 ETF Trust
+DNN       $3.93    6.11%       Denison Mines Corp.
+OPEN      $5.80    -1.19%      Opendoor Technologies Inc.
+T         $23.09   -1.55%      AT&T Inc.
+CVS       $71.34   -14.94%     CVS Health Corporation
+
+--------------------------------------------------------------------------------
+Total stocks: 50 | Displayed: 44 | Filtered (<$1): 6
+--------------------------------------------------------------------------------
+
+Fetching Barron's articles from past day...
+
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                  │
+│                                                                  Barron's News                                                                   │
+│                                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                                                      Showing 41 of 41 articles from past day                                                       
+
+════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+1. Cloudflare Stock: Why a Viral AI ‘Moltbot’ Has Sent Shares to the Moon
+January 27, 2026 at 01:44 PM
+https://www.barrons.com/articles/cloudflare-stock-price-ai-bot-moltbot-fdb3e77b?mod=hp_WIND_A_3_2
+
+The emergence of Moltbot, previously known as Clawdbot, affirms Cloudflare’s positioning as a cloud-network and security solution for the AI age.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+2. Nvidia Stock Gains. Microsoft’s New AI Chip Can’t Keep It Down.
+January 27, 2026 at 01:09 PM
+https://www.barrons.com/articles/nvidia-stock-price-microsoft-ai-chips-fade2362
+
+Nvidia stock was reacting after Microsoft unveiled its new in-house artificial-intelligence chip.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+3. Humana, UnitedHealth, and CVS Stocks Plunge After Trump Medicare Rates Blow
+January 27, 2026 at 10:00 AM
+https://www.barrons.com/articles/humana-unitedhealth-cvs-stock-medicare-rates-6bc17017
+
+Humana, UnitedHealth, and CVS Stocks Plunge. The Trump administration proposed keeping Medicare rates roughly flat this year.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+4. Bitcoin Rises on Optimism Over Upcoming Big Tech Earnings
+January 27, 2026 at 08:57 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012726/card/bitcoin-rises-on-optimism-over-upcoming-big-tech-earnings-Sm4CsgOSYdRtRrtz3
+fdX?modCode=hp_LEDE_C_LC_1
+
+Bitcoin was edging higher following gains in U.S. stocks overnight on optimism over upcoming U.S. megacap tech earnings.
+Investors are positioning ahead of results from Microsoft, Apple, Meta and Tesla this week.
+
+"The spotlight now shifts to whether the AI-fuelled stock rally can sustain its momen
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+5. Treasury Yields Mostly Rise as Markets Await Fed Decision
+January 27, 2026 at 08:57 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012726/card/treasury-yields-mostly-rise-as-markets-await-fed-decision-2myECaY7WBZZPgzVT
+gCl?modCode=hp_LEDE_C_LC_2
+
+U.S. Treasury yields were mostly rising in early trade as markets priced in unchanged interest rates at the Federal Reserve's rate decision on 
+Wednesday.
+After cutting its key policy rate by 75 basis points in 2025, the Fed is expected to start 2026 with a pause, at least in the conventional compon
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+6. Stock Market Today: S&P 500, Nasdaq Set to Open Up; Dow Futures Fall; Trump Shutdown Fears; Intel, Tesla, MP Materials, Nvidia, More Movers
+January 27, 2026 at 08:57 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012726
+
+The S&P 500 and Nasdaq are rising in premarket trading, the Dow is falling as the stock market digests the possibility of a government shutdown.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+7. S&P 500 Nears Record as Markets Shrug Off Shutdown Fears
+January 27, 2026 at 08:57 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012726/card/s-p-500-nears-record-as-markets-shrug-off-shutdown-fears-s5rwjmfA4BhpMVdPW3
+mm
+
+The S&P 500 and tech-heavy Nasdaq looked set to cruise higher on Tuesday as Wall Street looked past the threat of another government shutdown, while
+the precious metals rally was running out of steam.
+Futures tracking
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+8. Dollar Recovers as Japanese Yen Turns Lower
+January 27, 2026 at 08:57 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012726/card/dollar-recovers-as-japanese-yen-turns-lower-74HCGAes8nCSOYINn6CN?modCode=hp
+_LEDE_C_LC_1
+
+The dollar was recovering slightly as the Japanese yen pulled back after gains in the previous session that were driven by speculation about joint 
+U.S.-Japan interventions to support the Asian currency.
+Market attention is turning back to Japan's looming Feb. 8 snap election as official campaigning
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+9. EU Trade Deal Comes as Relief for India Exporters Amid U.S. Tariffs
+January 27, 2026 at 08:57 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012726/card/eu-trade-deal-comes-as-relief-for-india-exporters-amid-u-s-tariffs-oMTyBYR7
+kxLbTPzAkCHs
+
+The EU trade deal comes as a relief for India exporters grappling with a 50% baseline tariff rate in the U.S.—the Asian country's other major market
+next to Europe, said Alexandra Hermann at Oxford Economics.
+With the effective tariff rate in the EU averaging a modest 3%, further reductions are lik
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+10. U.S. AI-Related Stocks Gain Premarket, Following Bullish Asia Session
+January 27, 2026 at 08:57 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012726/card/u-s-ai-related-stocks-gain-premarket-following-bullish-asia-session-N2SKut0
+3gQZ8bXouDsRe
+
+Futures for U.S. AI-related stocks were rising after tech stocks gained in Asia trade and Micron Technology said after the close it will invest 
+around $24 billion in Singapore over the next decade on surging in demand for memory chips.
+Meanwhile, Micron competitor and Nvidia-supplier SK Hynix gaine
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+11. Dollar Slump Drags Greenback to Lowest Levels in 4 Years
+January 27, 2026 at 08:57 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012726/card/dollar-slump-drags-greenback-to-lowest-levels-in-4-years-AhD0Ll3D9OKZQK6WyO
+by?siteid=yhoof2&yptr=yahoo
+
+The U.S. dollar extended its slump on global foreign exchange markets, slumping to the lowest levels in four years, as investors continue to reprice
+the greenback amid dovish Federal Reserve rate expectations and increased talk of coordinated intervention to support the Japanese yen.
+Multiple media
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+12. The Stock Market Flipped From Nervous to Complacent. Earnings and the Fed Meeting Are a Major Test.
+January 27, 2026 at 08:57 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012726/card/the-stock-market-flipped-from-nervous-to-complacent-earnings-and-the-fed-me
+eting-are-a-major-test--OsMl67prxNwzcgTrUTVf
+
+The S&P 500 hit its highest level on record on Tuesday and was within 20 points of 7000.
+The market benchmark rose 0.5% to 6988.72, which is a fresh intraday high. It’s also trading above its Jan. 12 closing high of 6977.27. The Nasdaq 
+Composite rallied 1% to 23,838. It’s about 120 points away from
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+13. S&P 500 Nears Record. UnitedHealth Drags on the Dow.
+January 27, 2026 at 08:57 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012726/card/s-p-500-nears-record-unitedhealth-drags-on-the-dow--opdg1kPMmIBoAJRvZIjI
+
+The S&P 500 began Tuesday’s session on track for a fifth day of gains, but UnitedHealth Group dragged down the Dow Jones Industrial Average.
+The S&P 500 was up 0.2%. The Nasdaq Composite was up 0.6%. The Dow Jones Industrial Average fell 400 points, or 0.8%.
+
+“Following last night’s announcement th
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+14. Why Is the Dow Falling? Blame UnitedHealth Stock.
+January 27, 2026 at 08:57 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012726/card/why-is-the-dow-falling-blame-unitedhealth-stock--5Vtzhk2r6jgOFvf2hPqv
+
+The Dow is suffering from a case of “key stock risk.”
+The blue-chip index fell 500 points, or 1%, on Monday. UnitedHealth stock, down 19%, was shaving 404 points off the index.
+
+The S&P 500, on the other hand, was up 0.4%. The Nasdaq Composite rose 0.8%.
+
+The Dow weighs each component by its stock
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+15. Micron to Plow $24 Billion Into Singapore Chip Plant Amid Oversupply Fears
+January 27, 2026 at 08:06 AM
+https://www.barrons.com/articles/micron-stock-price-memory-chips-ai-350849a0?mod=hp_LEDE_C_5
+
+Micron Technology stock has soared amid surging memory-chip demand but it is wary of causing a glut in supply.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+16. Texas Instruments Earnings Preview: China Demand a Key Risk
+January 27, 2026 at 07:00 AM
+https://www.barrons.com/articles/texas-instruments-earnings-stock-price-28cd11e2
+
+The chip maker reports after the close. Analysts expect modest revenue and earnings declines and are watching China demand.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+17. US Immigration Agents Face Backlash After Minneapolis Killings
+January 27, 2026 at 02:09 AM
+https://www.barrons.com/news/us-immigration-agents-face-backlash-after-minneapolis-killings-d6f17b51
+
+The fatal shooting of two civilians in Minneapolis has reignited accusations that federal agents enforcing US President Donald Trump's militarized 
+immigration crackdown are inexperienced, under-trained and operating outside law enforcement norms.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+18. UnitedHealth Stock Plummets 17% After Earnings. Why Soft Revenue Isn’t the Only Problem.
+January 26, 2026 at 10:26 PM
+https://www.barrons.com/articles/united-health-earnings-stock-price-4b2ba8d2
+
+UnitedHealth posts weaker-than-expected fourth-quarter revenue. Meanwhile, the Trump administration plans to keep Medicare Advantage rates roughly 
+flat in 2027.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+19. American Airlines Stock Flies, JetBlue Shares Fall After Earnings Reports
+January 26, 2026 at 09:29 PM
+https://www.barrons.com/articles/american-airlines-earnings-stock-price-jetblue-b7448fd1
+
+American Airlines and JetBlue Airways reported earnings Tuesday but the stocks were moving in opposite directions.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+20. U.S. Markets Closed Up Monday; Zoom Communications Led Increases
+January 26, 2026 at 09:11 PM
+https://www.barrons.com/articles/u-s-markets-closed-up-monday-zoom-communications-led-increases-c0096793
+
+U.S. Markets Closed Up Monday; Zoom Communications Led Increases
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+21. Trump Could Make Your Mortgage Cheaper. How Japan’s Yen Fits In.
+January 26, 2026 at 08:46 PM
+https://www.barrons.com/articles/trump-bessent-treasury-mortgage-rates-japan-yen-fda4e46a?mod=RTA
+
+Wall Street is talking about the possibility of U.S. intervening in Japan’s currency crisis. Here is why the stock market cares so much.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+22. The Industrial REIT Prologis Is a Data Center Play. Why Some Analysts Don’t See It as a Buy.
+January 26, 2026 at 08:25 PM
+https://www.barrons.com/articles/reit-prologis-data-center-stock-898bb7fd?mod=RTA
+
+The industrial real estate sector has outperformed, but may face tougher going now.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+23. Zoom’s Anthropic Investment Could Be Worth Billions as AI Firm Weighs IPO
+January 26, 2026 at 04:45 PM
+https://www.barrons.com/articles/zoom-anthropic-stake-valuation-ipo-baird-dc55c415
+
+Baird estimates Zoom’s 2023 investment in Anthropic could now be worth $2 billion to $4 billion.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+24. BlackRock TCP Capital Stock Slides. It’s Private Credit’s Latest Problem Child.
+January 26, 2026 at 04:12 PM
+https://www.barrons.com/articles/blackrock-tcp-stock-private-credit-nav-decline-5a8c6605
+
+TCP Capital pointed to “issuer specific developments” in a securities filing.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+25. Silver’s Parabolic Rally Draws Profit-Taking as Bubble Fears Rise
+January 26, 2026 at 03:44 PM
+https://www.barrons.com/articles/silver-parabolic-rally-bubble-fears-profit-taking-9e6d3edd
+
+Soaring silver has some investors taking profits, and a big test to the rally is looming.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+26. Meta AI and Ad ‘Demand Machine’ Are Winners. The Stock Can Rise 34%, Analyst Says.
+January 26, 2026 at 02:55 PM
+https://www.barrons.com/articles/meta-ai-demand-machine-analysts-price-target-upgrade-8673a5c3
+
+Rothschild & Co Redburn upgraded Meta to Buy and lifted its price target to $900, arguing the company can keep gaining share in non-search digital 
+ads.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+27. Sarepta Stock Rises on Positive Three-Year Study Results for Elevidys
+January 26, 2026 at 01:53 PM
+https://www.barrons.com/articles/sarepta-stock-elevidys-study-2c493ca4?mod=RTA
+
+Sarepta reports positive, statistically significant results in a study evaluating the efficacy of its blockbuster gene therapy.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+28. IonQ Stock Pops. It's Buying Chip Maker SkyWater for $1.8 Billion.
+January 26, 2026 at 11:46 AM
+https://www.barrons.com/articles/ionq-stock-skywater-takeover-quantum-chips-3cc4398b
+
+IonQ stock rises. The quantum-computing company is buying SkyWater for $35 a share in a cash-and-stock transaction.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+29. USA Rare Earth, CoreWeave, Micron, Intel, Newmont, Booz Allen, IonQ, and More Movers
+January 26, 2026 at 10:44 AM
+https://www.barrons.com/articles/stock-movers-e7656fb8
+
+USA Rare Earth surges on a government investment, while CoreWeave jumps following an announcement that Nvidia is making a $2 billion investment in 
+the AI cloud company.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+30. Investors Favor U.S. Treasuries Despite Unpredictable Politics
+January 26, 2026 at 09:02 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012626/card/investors-favor-u-s-treasuries-despite-unpredictable-politics-xL6lDNNhSjFkh
+4exisjK
+
+U.S. Treasury yields have been fairly stable, even as the political environment in the U.S. is unpredictable, analysts at the Investment Institute 
+by UniCredit said in a note.
+Low volatility in U.S. Treasury yields indicates investors still favor the bonds, the analysts said. Markets expect the U.S
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+31. U.S. Policy Reinforces Gold's Role as Fear Index
+January 26, 2026 at 09:02 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012626/card/u-s-policy-reinforces-gold-s-role-as-fear-index-aZMXIq1yfev8X41Bg9tq
+
+Policy actions by the Trump administration are pushing gold higher as the precious-metal increasingly serves as a barometer of market fear, MUFG 
+analyst Soojin Kim wrote.
+"Renewed attacks on the Fed, threats of sweeping trade tariffs [and] geopolitical brinkmanship" are among the forces attractin
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+32. Stock Futures Stall, Gold Tops $5,000 After Fresh Trump Tariff Threats
+January 26, 2026 at 09:02 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012626/card/stock-futures-stall-gold-tops-5-000-after-fresh-trump-tariff-threats-r27AqN
+O0LVtkyfwH0yEW
+
+Stocks looked set to struggle for direction on Monday after President Donald Trump threatened to impose further tariffs on Canada, boosting the 
+likelihood that the “sell America” trade could gather pace this week.
+Futures tra
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+33. Stock Market Today: Dow, S&P 500, Nasdaq Set to Open Flat; Trump Tariff Fears; Nvidia, USAR, Intel, Super Micro, More Movers
+January 26, 2026 at 09:02 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012626
+
+The Dow, S&P 500, and Nasdaq are flat in premarket trading as the stock market grapples with President Donald Trump's latest tariff threats.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+34. Dollar Falls as Yen Strengthens on Intervention Speculation
+January 26, 2026 at 09:02 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012626/card/dollar-falls-as-yen-strengthens-on-intervention-speculation-6A7nVbbvKTpOuij
+2FejD
+
+The dollar remained weak after reaching a four-month low against a basket of currencies overnight as the Japanese yen surged on speculation of 
+coordinated U.S.-Japan interventions to support the currency.
+The Federal Reserve Bank of New York contacted potential trading counterparties on Friday for
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+35. Stocks Rise Slightly. Trump Tariff Threat, Shutdown Risk Still Loom.
+January 26, 2026 at 09:02 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012626/card/stocks-rise-slightly-trump-tariff-threat-shutdown-risk-still-loom--yjF94QQE
+oTvvcRzS2jgS
+
+Stocks were up slightly to start the week despite worries on Wall Street about tariff threats from President Donald Trump and rising risks of a 
+government shutdown.
+The Dow Jones Industrial Average rose 165 points, or 0.3%. The S&P 500 was up 0.2%. The Nasdaq Composite was up 0.1%. Futures tracking
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+36. Treasury Yields Little Changed Ahead of Fed Meeting
+January 26, 2026 at 09:02 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012626/card/treasury-yields-little-changed-ahead-of-fed-meeting-FqWXkbOtGoCrHEIGeHDR
+
+Treasury yields are steady following stale data amid rising political tension ahead of the Fed meeting.
+In data delayed by October's government shutdown, November durable goods orders rise 5.3%, after October's revised 2.1% decline and up from 4.5% 
+expected in a WSJ consensus.
+
+The Fed is expected
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+37. The S&P 500 Is Nearing 7000. What Could Get It There.
+January 26, 2026 at 09:02 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012626/card/the-s-p-500-is-nearing-7000-what-could-get-it-there--SVo6TQqiJG0oJC6dGweq
+
+The S&P 500 is making another run at 7000.
+The market benchmark was up 0.6% to put it within 50 points of the 7000 level. It got as close as 6986.33 on Jan. 12 before pulling back to end the 
+day with its current record close of 6977.27.
+
+The Dow was up 153 points, or 0.3%, to put it 340 points away
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+38. Stocks Pick Up Steam. Market Breadth Is Solid.
+January 26, 2026 at 09:02 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012626/card/stocks-pick-up-steam-market-breadth-is-solid--KJrqByKjhsm1hkedFujK
+
+The stock market shed its early jitters shortly after the market opened on Monday.
+The Dow was up 211 points, or 0.4%. The S&P 500 rose 0.4%. The Nasdaq Composite gained 0.3%.
+
+Stock futures were struggling earlier in the morning, but the major indexes all gained steam in the first 15 minutes of tr
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+39. The S&P 500 Moves Within 50 Points of a New Milestone
+January 26, 2026 at 09:02 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012626/card/the-s-p-500-moves-within-50-points-of-a-new-milestone-mm4uBGOFH3ljuPSpf4Cd
+
+The S&P 500 took another swing at the 7000 mark on Monday.
+The market benchmark was up 0.5% to move to within 50 points of 7000. The Nasdaq Composite was up 0.4%. The Dow Jones Industrial Average rose 314 
+points, or 0.6%.
+
+The S&P approached 7000 earlier this month before retreating. The pullback a
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+40. Gold Hit $5,000. Why It Can Hit $6,000.
+January 26, 2026 at 09:02 AM
+https://www.barrons.com/livecoverage/stock-market-news-today-012626/card/gold-hit-5-000-why-it-can-hit-6-000--ZHJlDr4B3bHKE0dGZ9TV
+
+Gold has reached a once-unthinkable price of $5,000 an ounce, and if you ask a top commodity research shop, more gains lie ahead.
+French bank Société Générale raised its year-end forecast for gold to $6,000, calling that a "conservative estimate" that could well go higher.
+
+Inflows can help explain
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+41. Samsung Wins Memory Chip Deal With Nvidia, Per Report. Why Micron Stock Is Dropping.
+January 26, 2026 at 08:13 AM
+https://www.barrons.com/articles/micron-stock-price-samsung-memory-chip-deal-nvidia-3a857e7c
+
+Micron stock has surged on excitement around high-bandwidth memory chips but it doesn’t have the market to itself. Samsung Electronics is set to 
+supply Nvidia with next-generation memory chips, according to a report.
+
+════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+
+Fetching WSJ Markets RSS feed...
+Parsing feed content...
+
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                  │
+│                                                                 WSJ Markets News                                                                 │
+│                                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                                                             Showing 61 of 61 articles                                                              
+
+════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+1. Stock Market Today: UnitedHealth, Other Health-Insurance Stocks Slide
+January 27, 2026 at 08:39 AM
+https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-01-27-2026?mod=rss_markets_main
+
+Dow falls, even as S&P; hits new high; GM stock rallies
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+2. When All Bets Are Off, All Bets Are On
+January 27, 2026 at 03:18 PM
+https://www.wsj.com/finance/investing/when-all-bets-are-off-all-bets-are-on-7b8bd8fd?mod=rss_markets_main
+
+Investors hate uncertainty. Speculators love it.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+3. FAT Brands Becomes Latest Casual-Dining Bankruptcy
+January 27, 2026 at 12:14 PM
+https://www.wsj.com/articles/fat-brands-twin-hospitality-shares-slide-premarket-on-bankruptcy-filings-955a616a?mod=rss_markets_main
+
+The owner of Fatburger and Johnny Rockets chains seeks to restructure $1.4 billion debt in chapter 11.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+4. AI Stocks Still Face a China Risk
+January 27, 2026 at 11:34 AM
+https://www.wsj.com/finance/stocks/ai-stocks-still-face-a-china-risk-73444a9f?mod=rss_markets_main
+
+Plus, health insurers getting slammed
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+5. This $14 Billion Meme Stock Says It Is Developing a Herbal Remedy for Autism
+January 27, 2026 at 10:30 AM
+https://www.wsj.com/finance/stocks/regencell-bioscience-holdings-stock-value-b1b859e3?mod=rss_markets_main
+
+The Nasdaq-listed company has recurring losses and no revenue.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+6. Former Citi Executive Sues Bank, Alleging Sexual Harassment
+January 27, 2026 at 02:08 AM
+https://www.wsj.com/finance/banking/former-citi-executive-sues-bank-alleging-sexual-harassment-bbf6b5b0?mod=rss_markets_main
+
+The lawsuit says the bank’s culture reduced her to being perceived as a sex object.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+7. The Gold Boom Has Miners Scrambling to Find the Next Mother Lode
+January 27, 2026 at 01:00 AM
+https://www.wsj.com/finance/commodities-futures/gold-prices-mining-south-africa-2226154c?mod=rss_markets_main
+
+Record prices are breathing new life into South Africa’s ailing gold-mining industry.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+8. The Wait List for a Birkin or Rolex Is Getting Shorter
+January 26, 2026 at 10:30 AM
+https://www.wsj.com/business/retail/the-wait-list-for-a-birkin-or-rolex-is-getting-shorter-fad4b109?mod=rss_markets_main
+
+Falling resale values show that even the makers of the world’s most popular luxury goods are feeling a slowdown.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+9. Can Trump and Big Pharma Get the World to Pay More for Drugs?
+January 25, 2026 at 10:30 AM
+https://www.wsj.com/health/pharma/can-trump-and-big-pharma-get-the-world-to-pay-more-for-drugs-bfe5e31d?mod=rss_markets_main
+
+Manufacturers are pushing for higher prices overseas, but face political and economic resistance.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+10. How Banks Can Appease Trump on Credit-Card Rates
+January 23, 2026 at 10:30 AM
+https://www.wsj.com/finance/banking/how-banks-can-appease-trump-on-credit-card-rates-d53c5cc3?mod=rss_markets_main
+
+The experience of the pharmaceutical industry shows a possible pathway for lenders.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+11. Change in Venezuela Isn’t the Only Reason to Own Oil-Field-Services Stocks
+January 22, 2026 at 10:30 AM
+https://www.wsj.com/business/energy-oil/change-in-venezuela-isnt-the-only-reason-to-own-oil-field-services-stocks-f9268f5c?mod=rss_markets_main
+
+Years of discipline have made companies such as Halliburton and SLB lean and efficient.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+12. Netflix Earnings Shed Light on Why It Needs Warner
+January 21, 2026 at 02:31 PM
+https://www.wsj.com/business/media/netflix-earnings-shed-light-on-why-it-needs-warner-76fcef61?mod=rss_markets_main
+
+The streaming giant still dominates, but growth is slowing and getting more expensive.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+13. Financial Services Roundup: Market Talk
+January 27, 2026 at 05:31 PM
+https://www.wsj.com/business/financial-services-roundup-market-talk-f8a6d816?mod=rss_markets_main
+
+Find insight on FTSE Russell, HSBC and more in the latest Market Talks covering financial services.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+14. Financial Services Roundup: Market Talk
+January 26, 2026 at 09:58 PM
+https://www.wsj.com/finance/banking/financial-services-roundup-market-talk-be02174b?mod=rss_markets_main
+
+Find insight on Canadian lenders, European banks and more in the latest Market Talks covering Financial Services.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+15. JPMorgan CEO Jamie Dimon Reaps $43 Million in Pay for Last Year
+January 22, 2026 at 10:02 PM
+https://www.wsj.com/finance/banking/jpmorgan-ceo-jamon-reaps-43-million-in-pay-for-last-year-8a0d0f5b?mod=rss_markets_main
+
+The pay package for the 69-year-old is a 10% increase from the previous year.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+16. Capital One Strikes $5.15 Billion Deal for Fintech Brex
+January 22, 2026 at 09:59 PM
+https://www.wsj.com/finance/banking/capital-one-to-buy-fintech-brex-e2dacc67?mod=rss_markets_main
+
+The deal gives the credit-card issuer access to technology used by thousands of companies for corporate credit cards.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+17. Trump Sues JPMorgan for $5 Billion for Closing His Bank Accounts
+January 22, 2026 at 07:48 PM
+https://www.wsj.com/finance/president-trump-sues-jpmorgan-for-5-billion-for-closing-his-bank-accounts-17892253?mod=rss_markets_main
+
+The president alleged the bank made a “woke” political decision to shut down family-business accounts following the Jan. 6, 2021, Capitol riot.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+18. Treasury Yields Mixed as Markets Brace for FX Intervention
+January 27, 2026 at 01:55 PM
+https://www.wsj.com/finance/short-dated-jgbs-rise-tracking-gains-in-treasurys-827279d6?mod=rss_markets_main
+
+Treasury yields were steady to higher as markets watched for potential U.S.-Japan intervention on FX markets to strengthen the yen.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+19. Nvidia Invests $2 Billion in CoreWeave in AI-Factory Collaboration
+January 26, 2026 at 09:31 PM
+https://www.wsj.com/tech/ai/nvidia-invests-2-billion-in-coreweave-in-ai-factory-collaboration-68088ca0?mod=rss_markets_main
+
+The companies said they would build AI factories on Nvidia’s computing-platform technology.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+20. Treasury Yields Fall Amid Political Tension
+January 26, 2026 at 08:48 PM
+https://www.wsj.com/finance/jgbs-rise-as-yens-appreciation-eases-boj-rate-increase-concerns-0608bd3c?mod=rss_markets_main
+
+Treasury yields declined as political tension rose the risk of a government shutdown, while demand for government debt remained robust.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+21. Lands’ End, WHP Global Form Joint Venture
+January 26, 2026 at 02:53 PM
+https://www.wsj.com/finance/investing/lands-end-whp-global-form-joint-venture-fcf23409?mod=rss_markets_main
+
+Lands’ End agreed to form a joint venture with brand management and acquisition company WHP Global in a deal that will provide the apparel company with $300 million in cash.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+22. Leidos to Buy Kohlberg’s Entrust for $2.4 Billion
+January 26, 2026 at 02:26 PM
+https://www.wsj.com/finance/investing/leidos-to-buy-kohlbergs-entrust-for-2-4-billion-c7deafef?mod=rss_markets_main
+
+Leidos Holdings has struck a deal to buy utility consulting and engineering services platform Entrust Solutions Group from private-equity firm Kohlberg & Co. for about $2.4 billion in cash.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+23. Tech, Media & Telecom Roundup: Market Talk
+January 27, 2026 at 05:25 PM
+https://www.wsj.com/business/tech-media-telecom-roundup-market-talk-cdfd7e8d?mod=rss_markets_main
+
+Find insight on Commvault Systems, Sage Group, U.S. AI-related stocks and more in the latest Market Talks covering technology, media and telecom.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+24. Gold and Silver Surge to Records, Buoyed by Concerns Over Tariffs, Government Shutdown
+January 26, 2026 at 09:31 PM
+https://www.wsj.com/finance/stocks/global-stocks-markets-dow-news-01-26-2026-4cf2acfa?mod=rss_markets_main
+
+Stocks edged higher ahead of this week’s batch of corporate earnings. The Dow industrials rose 0.6%.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+25. Is Small Beautiful Again in the Stock Market?
+January 26, 2026 at 11:24 AM
+https://www.wsj.com/finance/stocks/is-small-beautiful-again-in-the-stock-market-761a153d?mod=rss_markets_main
+
+Plus, gold at $5,000 and natural gas on fire
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+26. Wall Street Has Fallen Out of Love With Software Stocks
+January 25, 2026 at 10:30 AM
+https://www.wsj.com/finance/investing/wall-street-has-fallen-out-of-love-with-software-stocks-b050b457?mod=rss_markets_main
+
+Declines show how quickly sentiment can shift as money pours into the next hot investment.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+27. U.S. Stocks Zigzag on Geopolitical News, Ending Week Where They Started
+January 23, 2026 at 09:53 PM
+https://www.wsj.com/finance/commodities-futures/u-s-stocks-zigzag-on-geopolitical-news-ending-week-where-they-started-50855d49?mod=rss_markets_main
+
+The Dow Jones Industrials and the S&P; 500 edged lower on Friday.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+28. Opinion | The Answer to Trump’s Good Question About Interest Rates
+January 27, 2026 at 05:48 PM
+https://www.wsj.com/opinion/the-answer-to-trumps-good-question-about-interest-rates-6d4c8c3f?mod=rss_markets_main
+
+The Federal Reserve’s antigrowth assumptions undercut the dollar and hinder affordability.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+29. Opinion | The Golden Age Arrives, if Not as Planned
+January 26, 2026 at 10:30 PM
+https://www.wsj.com/opinion/gold-price-5000-markets-donald-trump-de17d26d?mod=rss_markets_main
+
+The metal’s rise to $5,000 is a market vote of declining confidence.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+30. Opinion | DEI Turns Fair-Lending Laws on Their Head
+January 26, 2026 at 10:21 PM
+https://www.wsj.com/opinion/dei-turns-fair-lending-laws-on-their-head-04faa69a?mod=rss_markets_main
+
+The CFPB is ending Biden-era racial discrimination.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+31. Opinion | Expose the Iran Money Trail
+January 23, 2026 at 03:44 PM
+https://www.wsj.com/opinion/expose-the-iran-money-trail-98d58969?mod=rss_markets_main
+
+Putting U.S. financial institutions on notice that they may be processing illicit funds invites further scrutiny.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+32. Opinion | Japan’s Economy Is Worse and Better Than the Doom and Gloom
+January 22, 2026 at 09:51 PM
+https://www.wsj.com/opinion/japans-economy-is-worse-and-better-than-the-doom-and-gloom-f6bd5f58?mod=rss_markets_main
+
+This week’s bond-market hubbub highlights the perils of a much-needed return to normalcy.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+33. Opinion | The Bond Vigilantes Head to Tokyo
+January 20, 2026 at 10:32 PM
+https://www.wsj.com/opinion/japan-bond-yields-sanae-takaichi-964ed649?mod=rss_markets_main
+
+Surging long rates warn that Japan needs better economic policies.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+34. Crude Futures Turn Higher in Early U.S. Trade
+January 27, 2026 at 02:30 PM
+https://www.wsj.com/finance/commodities-futures/oil-edges-lower-may-be-supported-by-iran-tensions-996daa58?mod=rss_markets_main
+
+Oil futures moved higher with concerns about supply disruptions keeping prices up.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+35. Gold Slips But Remains Above $5,000 Mark
+January 27, 2026 at 09:18 AM
+https://www.wsj.com/finance/commodities-futures/gold-rises-amid-concerns-over-tariffs-b70fef1e?mod=rss_markets_main
+
+Gold prices slipped but continued to hold above $5,000, driven by demand for safe-haven assets due to persistent geopolitical uncertainty and a broader flight from currencies and sovereign bonds.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+36. Basic Materials Roundup: Market Talk
+January 26, 2026 at 09:58 PM
+https://www.wsj.com/finance/commodities-futures/basic-materials-roundup-market-talk-47cccf14?mod=rss_markets_main
+
+Find insight on silver prices, Eldorado Gold, Canadian miners and more in the latest Market Talks covering Basic Materials.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+37. Oil Futures Settle Lower in Rangebound Trade
+January 26, 2026 at 09:04 PM
+https://www.wsj.com/finance/commodities-futures/oil-falls-on-possible-technical-correction-c8db7da1?mod=rss_markets_main
+
+Oil futures settled lower in a rangebound session, supported in part by the loss of some U.S. production to winter storm Fern and gains in diesel prices as heating fuel demand rose.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+38. U.S. Natural Gas Extends Rally on Winter Storm
+January 26, 2026 at 08:39 PM
+https://www.wsj.com/finance/commodities-futures/european-gas-prices-spike-in-early-monday-trade-2040b2bb?mod=rss_markets_main
+
+U.S. natural gas futures rose to a three-year high as winter storm Fern drives up heating demand and freezes in substantial amounts of production.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+39. Yen Rises After Japan’s Katayama Keeps Intervention Speculation Alive
+January 27, 2026 at 02:27 PM
+https://www.wsj.com/finance/currencies/yen-consolidates-faces-risk-of-volatility-in-near-term-2de6060f?mod=rss_markets_main
+
+The yen rose to an 11-week high against the dollar after Japan’s finance minister Satsuki Katayama said Japan would take appropriate action in the foreign exchange market if needed.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+40. Wall Street Is Fixated on a Possible Yen Intervention
+January 26, 2026 at 10:46 PM
+https://www.wsj.com/finance/currencies/wall-street-is-fixated-on-a-possible-yen-intervention-ef716054?mod=rss_markets_main
+
+A “rate check” by U.S. officials has boosted the Japanese currency.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+41. Yen Interventions Look Highly Likely
+January 26, 2026 at 03:25 PM
+https://www.wsj.com/finance/currencies/yen-strengthens-amid-prospects-of-fx-intervention-8dea2fb5?mod=rss_markets_main
+
+The dollar fell against the yen as intervention on the Japanese currency looks highly likely, Evercore ISI said.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+42. Yen Strength Lifts Japanese Bonds, Pushes Down Stocks
+January 26, 2026 at 07:38 AM
+https://www.wsj.com/finance/japan-government-bond-yields-stocks-fall-after-yens-rebound-8c6a1914?mod=rss_markets_main
+
+Japanese stocks fell and long-term government bonds rose after U.S. and Japanese authorities signaled that they are ready to step in to support the yen.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+43. Treasury ‘Rate Check’ Boosts Yen, Weakens Dollar
+January 24, 2026 at 03:06 AM
+https://www.wsj.com/finance/currencies/treasury-rate-check-boosts-yen-weakens-dollar-c98a44e5?mod=rss_markets_main
+
+U.S. and Japanese authorities are increasingly worried about the yen, and could be signaling intervention is around the corner.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+44. How Trump’s Ally at the Fed Is Remaking Bank Oversight
+January 26, 2026 at 01:00 AM
+https://www.wsj.com/economy/central-banking/how-trumps-ally-at-the-fed-is-remaking-bank-oversight-b1f0fab3?mod=rss_markets_main
+
+Michelle Bowman, the central bank’s vice chair for supervision, is slashing staff, changing rules and adding to the tension at the Fed in the process.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+45. The Uproar Over Affordability Is Coming for Insurers
+January 22, 2026 at 10:30 AM
+https://www.wsj.com/finance/the-uproar-over-affordability-is-coming-for-insurers-3a85723a?mod=rss_markets_main
+
+The industry’s financial well-being is at odds with the experience of customers who have endured large rate increases.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+46. Are Megabanks Next in Trump’s Crackdown on Stock Buybacks?
+January 19, 2026 at 10:30 AM
+https://www.wsj.com/finance/regulation/are-megabanks-next-in-trumps-crackdown-on-stock-buybacks-e696b466?mod=rss_markets_main
+
+After the Trump administration’s threats to defense contractors and home builders, the risk has jumped for bank shareholders.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+47. Swedbank Shares Climb After U.S. Justice Department Closes Probe
+January 15, 2026 at 10:26 AM
+https://www.wsj.com/finance/swedbank-shares-climb-after-u-s-justice-department-closes-probe-9e36e5c1?mod=rss_markets_main
+
+Shares rose as much as 6.8% before somewhat paring back gains. The stock has risen nearly 50% over the past year.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+48. Banks Cry Foul Over High-Yielding Tokens as Crypto Fight Simmers in Washington
+January 15, 2026 at 03:03 AM
+https://www.wsj.com/finance/regulation/banks-and-crypto-clash-over-tokens-that-pay-more-than-deposits-c9159c0e?mod=rss_markets_main
+
+The fight is one factor delaying the Senate Banking Committee effort to advance a bill defining crypto market rules.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+49. First Brands Winding Down Parts of Business
+January 26, 2026 at 09:57 PM
+https://www.wsj.com/articles/first-brands-winding-down-parts-of-business-29dfd721?mod=rss_markets_main
+
+The bankrupt auto-parts supplier has been unable to shore up additional liquidity it needs before cash runs out in days.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+50. Five Reasons Gold Prices Surged Above $5,000 an Ounce
+January 26, 2026 at 07:48 PM
+https://www.wsj.com/finance/commodities-futures/gold-prices-5000-ounce-2026-67361c87?mod=rss_markets_main
+
+Buying the precious metal has become the antidote for market jitters.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+51. Forgent Power Solutions IPO Terms Could Push Market Cap Above $8.8 Billion
+January 26, 2026 at 04:22 PM
+https://www.wsj.com/articles/forgent-power-solutions-ipo-terms-could-push-market-cap-above-8-8-billion-1c07a552?mod=rss_markets_main
+
+The company plans to sell nearly 16.6 million shares at between $25 and $29 apiece.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+52. The Man Who Almost Replaced Warren Buffett
+January 25, 2026 at 07:49 PM
+https://www.wsj.com/business/david-sokol-berkshire-hathaway-a2f92bf2?mod=rss_markets_main
+
+David Sokol was seen as the next likely CEO of Berkshire Hathaway—until a controversy arose over his personal trades.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+53. Hedge Funds Are Back on Top After a Long ‘Alpha Winter’
+January 24, 2026 at 02:00 AM
+https://www.wsj.com/finance/investing/hedge-funds-are-back-on-top-after-a-long-alpha-winter-f5c7cd21?mod=rss_markets_main
+
+Nearly half of investors plan to increase exposure to hedge funds, according to a Goldman Sachs survey.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+54. What Is a Money Market Account?
+September 18, 2025 at 09:21 PM
+https://www.wsj.com/buyside/personal-finance/banking/money-market-accounts?mod=rss_markets_main
+
+Money market accounts act as hybrids of checking and savings accounts.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+55. Best High-Yield Savings Accounts of June 2025
+June 25, 2025 at 02:58 PM
+https://www.wsj.com/buyside/personal-finance/banking/what-is-a-high-yield-savings-account?mod=rss_markets_main
+
+Save for financial goals faster with a high-yield savings account.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+56. How to Pick a Financial Advisor
+March 10, 2025 at 04:23 PM
+https://www.wsj.com/buyside/personal-finance/financial-tips/how-to-choose-financial-advisor?mod=rss_markets_main
+
+This guide decodes the wide variety of certifications and services—along with a checklist of what to ask before you choose.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+57. The Medicare Charge That’s Taking a Bigger Bite Out of Social Security Checks
+January 23, 2026 at 10:30 AM
+https://www.wsj.com/personal-finance/taxes/what-is-irmaa-medicare-social-security-c7e2860a?mod=rss_markets_main
+
+Nearly six million seniors owe extra Medicare premiums called Irmaa, and these charges are set to rise.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+58. Private-Credit Investors Are Cashing Out in Droves
+January 22, 2026 at 02:00 AM
+https://www.wsj.com/finance/investing/private-credit-investors-are-cashing-out-in-droves-bc1e8cbc?mod=rss_markets_main
+
+Redemptions by individual investors in the funds soared at the end of 2025 after performance declined, reviving questions about suitability.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+59. Trump Sues JPMorgan for $5 Billion for Closing His Bank Accounts
+January 22, 2026 at 07:48 PM
+https://www.wsj.com/finance/president-trump-sues-jpmorgan-for-5-billion-for-closing-his-bank-accounts-17892253?mod=rss_markets_main
+
+The president alleged the bank made a “woke” political decision to shut down family-business accounts following the Jan. 6, 2021, Capitol riot.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+60. Five Reasons Gold Prices Surged Above $5,000 an Ounce
+January 26, 2026 at 07:48 PM
+https://www.wsj.com/finance/commodities-futures/gold-prices-5000-ounce-2026-67361c87?mod=rss_markets_main
+
+Buying the precious metal has become the antidote for market jitters.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+61. The New Tax Rules That Can Get You a Bigger Refund This Year
+January 26, 2026 at 10:30 AM
+https://www.wsj.com/personal-finance/taxes/tax-deductions-2025-refunds-7a6a64bd?mod=rss_markets_main
+
+What to know about the increased SALT deduction, the new tax break for seniors and other provisions that kick in for your next return.
+
+════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+
+Fetching top posts from 3 subreddits...
+  Fetching r/ValueInvesting...
+  ✓ Found 25 posts from r/ValueInvesting
+  Fetching r/stocks...
+  ✓ Found 25 posts from r/stocks
+  Fetching r/options...
+  ✓ Found 18 posts from r/options
+
+✓ Successfully fetched posts (cost: 3 API credits)
+
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                  │
+│                                                     Reddit Top Posts - Investment Subreddits                                                     │
+│                                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                                         Top 15 posts from past day • r/ValueInvesting, r/stocks, r/options                                         
+
+════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+r/ValueInvesting
+Showing top 15 of 25 posts
+
+1. Novo Nordisk - Buy like there is no tomorrow
+↑ 155 upvotes  •  103 comments  •  86% upvoted  •  u/Correct_Fall_5484
+https://www.reddit.com/r/ValueInvesting/comments/1qofbf6/novo_nordisk_buy_like_there_is_no_tomorrow/
+
+Hi everyone, I know that Novo Nordisk has been mentioned many times here, but here are some reasons to buy this stock and hold it for at least 3 
+years:
+
+1. European pension funds are one of the biggest investors in US stocks and they are shifting away rapidly from investments due to economic, 
+politi...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+2. I guess UNH got wrecked...
+↑ 141 upvotes  •  182 comments  •  94% upvoted  •  u/AltruisticCoder
+https://www.reddit.com/r/ValueInvesting/comments/1qoc5wb/i_guess_unh_got_wrecked/
+
+I was very bullish going into, but given all the new information, less so about earnings and more from the proposed flat rate, it's not looking 
+great!
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+3. Health insurance stocks plummetting.
+↑ 138 upvotes  •  107 comments  •  96% upvoted  •  u/FieryXJoe
+https://www.reddit.com/r/ValueInvesting/comments/1qntg0p/health_insurance_stocks_plummetting/
+
+Trump admin announced flat medicare rates causing many insurance companies to drop 10%.
+
+What bargains do you see?
+
+I'm close to buying another UNH share but want to shop around first. 
+
+Edit: Since reddit is pushing this post I'll redirect some attention to the [7th Weekly Berkshire Hathaway Shareh...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+4. Which would you choose? UNH, NFLX, TTD?
+↑ 46 upvotes  •  75 comments  •  88% upvoted  •  u/Altruistic-Leader-63
+https://www.reddit.com/r/ValueInvesting/comments/1qo4yxe/which_would_you_choose_unh_nflx_ttd/
+
+Like the title suggests, which do you see as a value investment?
+
+UNH: Strong, recession proof company that gives dividends and currently in the midst of a turnaround with management. Trumps policies on health 
+insurance may hurt the stock short-term, but I expect a strong return to above $400 in the...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+5. The Missing Link in the Semiconductor Supply Chain: Canatu
+↑ 40 upvotes  •  18 comments  •  94% upvoted  •  u/Borrtex
+https://www.reddit.com/r/ValueInvesting/comments/1qo8ypa/the_missing_link_in_the_semiconductor_supply/
+
+I’ve been researching a small Finnish company called **Canatu**, and it’s one of the most interesting investments I’ve come across in a while. It’s 
+not a semiconductor company, not an AI company, and not a software business. It sits much deeper in the stack, at a physical bottleneck the entire 
+AI an...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+6. UNH is a Value Trap
+↑ 39 upvotes  •  142 comments  •  60% upvoted  •  u/ahlornjtvn139
+https://www.reddit.com/r/ValueInvesting/comments/1qogqze/unh_is_a_value_trap/
+
+Could hit $200 by end of year, please do not hold your bags just get out while you still can.
+
+MCR rate is ~92%
+
+CMS funding is going to fund Trumps defence budget
+
+UNH are haemorrhaging customers just to hold margins, down to <3m
+
+Days Claim Payable also jumped from 48 days to 54 days - they ar...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+7. Oatly: The Comeback Nobody Is Pricing In (NASDAQ:OTLY)
+↑ 18 upvotes  •  19 comments  •  83% upvoted  •  u/No-Topic5958
+https://seekingalpha.com/article/4862597-oatly-the-comeback-nobody-is-pricing-i
+
+A good due diligence published in seeking alpha.
+
+Two topics to add here : the material prices (especially oats) anchored to 5 year low since September , which is 20% less vs first half of the year 
+and much lower vs PY. This will have significant margin impact on 2026 financials.
+
+The company also a...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+8. Is Gold Exploding Past $5,100 a Safe-Haven Rally or Overhyped Bubble?
+↑ 13 upvotes  •  53 comments  •  71% upvoted  •  u/Practical-Solutions1
+https://www.reddit.com/r/ValueInvesting/comments/1qoao9r/is_gold_exploding_past_5100_a_safehaven_rally_or/
+
+Gold just shattered records again, blasting 2% higher to $5,077/oz (peaking at $5,110) with a YTD gains at **18% in 2026...** building on last 
+year's insane 64% run where it smashed $3K and $4K barriers. U.S. futures settled at $5,082, but it feels like this isn't just momentum...
+
+Here are what i b...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+9. I made a free stock analysis website catered to beginner investors because I was frustrated with current resources for learning. Please check it 
+out and give feedback!
+↑ 12 upvotes  •  7 comments  •  73% upvoted  •  u/These_Commercial_977
+https://hatchlinginvestor.com/
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+10. Thoughts on $SIRI?
+↑ 11 upvotes  •  31 comments  •  82% upvoted  •  u/Background-Plant-297
+https://www.reddit.com/r/ValueInvesting/comments/1qo1dsf/thoughts_on_siri/
+
+Hey guys Berkshire stake in $siri seems pretty bullish, I just did my own assessment as well and it seems like one of the top attractive 
+opportunities. With a 3x upside in the near time whilst a permanent hold type of play. Seems like everyone is misreading the business as a 
+competitor to spotify.et...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+11. Another EU Value Investment : Tikehau Capital (TKO.PA)
+↑ 11 upvotes  •  4 comments  •  92% upvoted  •  u/Anceradi
+https://www.reddit.com/r/ValueInvesting/comments/1qnqfuq/another_eu_value_investment_tikehau_capital_tkopa/
+
+I've seen quite a few people here looking for value on the EU markets, and I believe this company represents one of the best value opportunities 
+currently available. I found TKO while looking for companies which might benefit from the "Savings and investment union", as I 
+think that ...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+12. Boston Scientific (BSX) Analysis
+↑ 7 upvotes  •  7 comments  •  82% upvoted  •  u/SuckWallStreetDry
+https://www.reddit.com/r/ValueInvesting/comments/1qnub8x/boston_scientific_bsx_analysis/
+
+**TL;DR:** BSX is a well-run medtech company with strong tailwinds, but at $92 it's priced for perfection. Fair value sits around $62-78. Worth 
+watching, not buying.
+
+---
+
+## The Story
+
+Mike Mahoney took over a struggling $7B company in 2012, buried in debt from the Guidant disaster. Fourteen years ...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+13. $TTD: S&amp;P 500’s Biggest Loser of 2025—Dead Money or Generational Bargain?
+↑ 7 upvotes  •  8 comments  •  90% upvoted  •  u/Relevant-Push-2901
+https://www.reddit.com/r/ValueInvesting/comments/1qoiko7/ttd_sp_500s_biggest_loser_of_2025dead_money_or/
+
+# 1. Why did it crash?
+
+* **The Growth "Cool-down":** Revenue growth slowed from 30%+ to the high teens (16–18%). For a hyper-growth stock, any deceleration results in a 
+violent valuation reset.
+* **The Amazon DSP Threat:** Amazon upgraded its ad-buying tech and locked down exclusive deals (Prime Vi...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+14. GOOGL's hidden stock risks
+↑ 6 upvotes  •  34 comments  •  53% upvoted  •  u/MinuteDistribution31
+https://www.reddit.com/r/ValueInvesting/comments/1qnszqe/googls_hidden_stock_risks/
+
+Been digging into Alphabet's financials and wanted to share some findings that go beyond the surface level bullish narrative. This isn't investment 
+advice, just my analysis. The headline numbers look great: Net income up 36% YoY to $100.1B Operating cash flow jumped to $125.3B Stock up \~65% 
+in 20...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+15. What value investors do you look up to the most?
+↑ 6 upvotes  •  17 comments  •  88% upvoted  •  u/TheeMonkeyMonk
+https://www.reddit.com/r/ValueInvesting/comments/1qohqkk/what_value_investors_do_you_look_up_to_the_most/
+
+Who would sprout say has been the biggest inspiration for your value investing journey?
+
+════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+r/stocks
+Showing top 15 of 25 posts
+
+1. Treasury cancels Booz Allen contracts after employee leaked Trump tax records; stock falls
+↑ 6,092 upvotes  •  244 comments  •  97% upvoted  •  u/WickedSensitiveCrew
+https://www.reddit.com/r/stocks/comments/1qnowp0/treasury_cancels_booz_allen_contracts_after/
+
+https://www.cnbc.com/2026/01/26/trump-tax-records-treasury-cancels-booz-allen-contracts.html
+
+> Treasury Secretary Scott Bessent on Monday said he had canceled all Treasury Department contracts with the consulting firm Booz Allen Hamilton,
+whose employee leaked the tax records of President Donald...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+2. Trump Hikes Tariffs on South Korea to 25%, up from 15%
+↑ 1,007 upvotes  •  152 comments  •  97% upvoted  •  u/AnonymousTimewaster
+https://www.reddit.com/r/stocks/comments/1qnvylq/trump_hikes_tariffs_on_south_korea_to_25_up_from/
+
+Looks like he's not done trying to rally gold after his weekend threat against Canada.
+
+Load up on your stocks boys because it'll be TACO Tuesday tomorrow
+
+[From NBC](https://www.nbcnews.com/business/economy/trump-says-hiking-tariffs-south-korean-goods-25-rcna256028):
+
+President Donald Trump said Mo...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+3. The silver market is making moves that don’t make sense anymore
+↑ 822 upvotes  •  301 comments  •  94% upvoted  •  u/Axirohq
+https://www.reddit.com/r/stocks/comments/1qo9afu/the_silver_market_is_making_moves_that_dont_make/
+
+The swings in silver over the last day have been nothing short of extreme.
+
+Within roughly 14 hours, silver saw close to $2 trillion in market cap swing back and forth. Early in the US session it added around $500B, only to 
+give back almost $1T a few hours later, and then rally another $500B again i...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+4. India-EU just signed a massive Free Trade Agreement... while Trump is threatening a new tariff war. Is global trade splitting in real time?
+↑ 684 upvotes  •  260 comments  •  92% upvoted  •  u/GlitteringMine7494
+https://www.reddit.com/r/stocks/comments/1qo85bk/indiaeu_just_signed_a_massive_free_trade/
+
+While everyone's distracted by earnings and rate cut rumors, something huge is happening under the surface:
+
+India and the EU just locked in a landmark Free Trade Agreement, opening the door to deeper integration, cheaper trade flows, and long-term economic
+alignment.
+
+At the exact same time Trump i...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+5. Microsoft says its newest AI chip Maia 200 is 3 times more powerful than Google's TPU and Amazon's Trainium processor
+↑ 401 upvotes  •  61 comments  •  94% upvoted  •  u/DaddyVaradkar
+https://www.reddit.com/r/stocks/comments/1qo577e/microsoft_says_its_newest_ai_chip_maia_200_is_3/
+
+* Microsoft Corp. is rolling out its second-generation artificial intelligence chip, the Maia 200 chip, to power its services more efficiently and 
+provide an alternative to Nvidia Corp. hardware
+* The Maia 200 chip will be used to power the Copilot assistant for businesses and AI models, including O...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+6. Space Stocks Down Today
+↑ 399 upvotes  •  126 comments  •  92% upvoted  •  u/Mathyou12
+https://www.reddit.com/r/stocks/comments/1qnw8uq/space_stocks_down_today/
+
+RKLB -9.5%
+
+ASTS -7.75%
+
+LUNR -8%
+
+SATL -12.75%
+
+PL -4%
+
+UFO (ETF) -3.5%
+
+ROKT (ETF) -2.5%
+
+RDW - 12%
+
+I don’t see any particularly significant news regarding the space sector. any reason why all of these stocks are down today?
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+7. Nike to cut 775 employees as it accelerates ‘automation’ at U.S. distribution centers
+↑ 260 upvotes  •  39 comments  •  96% upvoted  •  u/Puginator
+https://www.reddit.com/r/stocks/comments/1qnt93t/nike_to_cut_775_employees_as_it_accelerates/
+
+Nike is cutting 775 employees as the company looks to boost its bottom line and accelerate its use of “automation,” CNBC has learned. 
+
+The layoffs, which are in addition to the 1,000 corporate job cuts the company announced last summer, primarily impact distribution center roles in 
+Tennessee and Mi...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+8. Have we turned a corner?
+↑ 84 upvotes  •  65 comments  •  77% upvoted  •  u/Accomplished_Way8964
+https://www.reddit.com/r/stocks/comments/1qnurr2/have_we_turned_a_corner/
+
+TL;DR - There was no market reaction to Trump's weekend threats.  
+***  
+It's been pretty well understood for a while now that Trump will walk back whatever crazy threats he tweets on any random weekend (TACO), but it 
+still impacts the markets when they re-open. Last week it was the threat of tak...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+9. Is there still a bullish case of Silver now that it crossed 100?
+↑ 67 upvotes  •  43 comments  •  81% upvoted  •  u/Derpy_Mc_Burpy
+https://www.reddit.com/r/stocks/comments/1qo5to9/is_there_still_a_bullish_case_of_silver_now_that/
+
+I am hoping to get more detailed explanations because I'm no economist, and safe-haven stocks aren't my strong suit, so please correct me if I'm 
+wrong, but from what I saw floating around, that provides a bullish argument for silver is:
+
+- silver has more industrial use instead of just a primary sa...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+10. META: Threads Monetisation, Smart Glasses Dominance, and New Subscription Tiers
+↑ 65 upvotes  •  36 comments  •  80% upvoted  •  u/Not69Batman
+https://www.reddit.com/r/stocks/comments/1qnze8g/meta_threads_monetisation_smart_glasses_dominance/
+
+Meta is executing a three pronged strategy: text based social market (Threads), next gen hardware platform (Smart Glasses) and diversifying revenue 
+(Subscriptions).
+
+**Threads**
+
+Meta is pivoting Threads from growth to revenue mode.
+
+* Threads recently surpassed X in global mobile Daily Active Users...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+11. Drone stocks down today
+↑ 33 upvotes  •  45 comments  •  77% upvoted  •  u/BlackManInYou
+https://www.reddit.com/r/stocks/comments/1qns3ae/drone_stocks_down_today/
+
+Any reason why drone stocks are tanking today? I’ve been having pretty good luck with options on drone stocks and they’ve been relatively 
+“consistent” in terms of drawn out spikes and dips. What do you guys think is happening today that’s causing these stocks to drop so aggressively?
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+12. what are the expected effects of BOJ intervention to stabilize 30-year bond and yen
+↑ 33 upvotes  •  15 comments  •  93% upvoted  •  u/Curious_me_too
+https://www.reddit.com/r/stocks/comments/1qnzrdt/what_are_the_expected_effects_of_boj_intervention/
+
+Hi,  
+After the recent run on Japan 30yr bond, there's some news that Bank of Japan may step in to stabilize yen.  
+I am trying to understand what are the possible impacts of BOJ stepping in to support ? Looking especially for possible impact scenarios in US 
+market ( both fixed and equity). 
+
+Please...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+13. Energy Stocks or other sectors exposure
+↑ 10 upvotes  •  17 comments  •  82% upvoted  •  u/Timely_Tip_6450
+https://www.reddit.com/r/stocks/comments/1qnvkws/energy_stocks_or_other_sectors_exposure/
+
+I’m thinking about adding some energy exposure to my portfolio but not really sure where to start. Are there any energy stocks or ETFs you 
+personally like or are watching?
+
+I’m open to anything, traditional oil &amp; gas, renewables, dividend plays, long-term holds, whatever you think is worth check...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+14. r/Stocks Daily Discussion &amp; Technicals Tuesday - Jan 27, 2026
+↑ 9 upvotes  •  280 comments  •  81% upvoted  •  u/AutoModerator
+https://www.reddit.com/r/stocks/comments/1qoa9tx/rstocks_daily_discussion_technicalsa_tuesday_jan/
+
+This is the daily discussion, so anything stocks related is fine, but the theme for today is on technical analysis (TA), but if TA is not your thing
+then just ignore the theme.
+
+Some helpful day to day links, including news:
+
+* [Finviz](https://finviz.com/quote.ashx?t=spy) for charts, fundamentals, ...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+15. Comstock Silver - Solar Panel Recycler
+↑ 8 upvotes  •  4 comments  •  100% upvoted  •  u/CaptinCook007
+https://www.reddit.com/r/stocks/comments/1qodn1z/comstock_silver_solar_panel_recycler/
+
+Any thoughts on Comstock Inc?
+
+Launching Vega 1 industrial scale facility this spring.
+
+The only EPA-certified zero-waste solar panel recycling facility to date.
+
+Can process any type of solar panel in 7 seconds at lowest variable cost.
+
+2M oz silver per year at full capacity, plus 3M lbs copper alo...
+
+════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+r/options
+Showing top 15 of 18 posts
+
+1. After Few Years Wheeling + LEAPS Beats All.
+↑ 228 upvotes  •  131 comments  •  92% upvoted  •  u/breakyourteethnow
+https://www.reddit.com/r/options/comments/1qo1jmn/after_few_years_wheeling_leaps_beats_all/
+
+People confuse these two strategies, the goal is to have an income engine currently mine is LAC. I sell aggressively weekly ATM calls in IRA, I do 
+not care where the price goes. I am strictly looking to generate an income.
+
+The income harvested then goes into max date LEAPS, into companies I believe...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+2. The Wheel Method &amp; LEAPS
+↑ 18 upvotes  •  17 comments  •  91% upvoted  •  u/Odd_Mathematician_82
+https://www.reddit.com/r/options/comments/1qnxyt7/the_wheel_method_leaps/
+
+TLDR; brand new to wheel and leaps, need help navigating
+
+Hi all - 
+
+Some background about me: i traded options while in college from whatever campus job i had at the time. most of then were just YOLOing calls hoping 
+to get rich quick. That was 5 years ago and I was kind of dumb. Now that I’m older a...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+3. Wheel strategy guide (part 2/X) - watchlist advice and DTE
+↑ 7 upvotes  •  7 comments  •  82% upvoted  •  u/TheDavidRomic
+https://www.reddit.com/r/options/comments/1qnxfku/wheel_strategy_guide_part_2x_watchlist_advice_and/
+
+Greetings,   
+  
+This is a text about the wheel options strategy and it's a second part to it that I've written. This text is meant for beginners.  
+  
+Why am I writing this?  
+Because writing down this process helps me improve and potentially connect with like-minded individuals.  
+Anyone is welcom...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+4. Hedging long calls META
+↑ 4 upvotes  •  3 comments  •  70% upvoted  •  u/totalthrowawayyy6365
+https://www.reddit.com/r/options/comments/1qns3hh/hedging_long_calls_meta/
+
+Hey, I hold META calls 700 expiring April this year and it became a decent part of my portfolio. I consider locking some profits/hedging by selling 
+higher call same expiry.
+
+I’m around 100% profit.
+
+Also soon are earnings.
+
+I’ll be happy for some insights. Thanks
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+5. Rolling GOOGL LEAPS: ITM vs ATM
+↑ 2 upvotes  •  3 comments  •  63% upvoted  •  u/sm7196
+https://www.reddit.com/r/options/comments/1qnphqj/rolling_googl_leaps_itm_vs_atm/
+
+Hey everyone, looking for some fresh eyes on a GOOGL position I'm managing.
+
+Right now I’m holding 20 LEAPS total: 10 for June 2026 ($255 strike) and 10 for Dec 2026 ($300 strike). I bought these back in March/April last year
+and I am up *significantly* on these. I’m long-term bullish on the stock, ...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+6. Earnings checklist
+↑ 2 upvotes  •  6 comments  •  63% upvoted  •  u/Electronic_Sport5553
+https://www.reddit.com/r/options/comments/1qo4zhc/earnings_checklist/
+
+Hi everyone,   
+I am preparing a checklist to buy the dip mainly during the earnings, I usually check  
+IV  
+Delta  
+trend  
+news(sometime)
+
+drop yours so i can add it.
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+7. Volatility for Ranges and breakouts?
+↑ 2 upvotes  •  3 comments  •  67% upvoted  •  u/CommitteeRealistic39
+https://www.reddit.com/r/options/comments/1qo0jnv/volatility_for_ranges_and_breakouts/
+
+So i am primarly Interday Future Scalper using orderflow but came contact into Optionflow. I wanted to understand why certain Sup Resis Hod/lod or 
+Ranges are created. Currently i am trying to understand when to expect ranging Conditions and when trending Conditions. As far as I am, I am 
+primarly usi...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+8. Any good books for Otes focusing on greeks?
+↑ 2 upvotes  •  6 comments  •  62% upvoted  •  u/CommitteeRealistic39
+https://www.reddit.com/r/options/comments/1qoc2l8/any_good_books_for_otes_focusing_on_greeks/
+
+I am a futures Scalper who uses Optiosnflow as narrative. Currently i am reading Options pricing and Volatility by Nattenberg and tbh i am very 
+disapointed. It is rather focused on Long term/ mid term but not for short term... did not yet Finished the book. I have read through the sub but 
+tbh All th...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+9. Conflicting Robinhood support answers on options proceeds + Section 1256 mark-to-market
+↑ 1 upvotes  •  10 comments  •  60% upvoted  •  u/8wise
+https://www.reddit.com/r/options/comments/1qobosp/conflicting_robinhood_support_answers_on_options/
+
+I’m posting to see if anyone has dealt with this before.
+
+I closed an options position on Robinhood (sold to close 2 contracts of a GLD call expiring in May 2026). On the day I closed it, Robinhood showed 
+my “credit at close” around $30.2k (which matches the trade confirmation: fill price ~$151/con...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+10. Stop orders
+↑ 1 upvotes  •  19 comments  •  67% upvoted  •  u/NotmeitsuTN
+https://www.reddit.com/r/options/comments/1qnspcs/stop_orders/
+
+Just wondering. Let the hate begin....
+
+I have a BA 220C 12/18/26 that has done well rather quickly...I want to set a stop order. So if I want to get out of the position say if it drops to
+$50. Do you frequent traders set the stop with a buffer like $50.50 to try insure you get the $50 or do you ju...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+11. Understanding Delta hedging
+↑ 0 upvotes  •  11 comments  •  50% upvoted  •  u/WillingDelay4973
+https://www.reddit.com/r/options/comments/1qojx0o/understanding_delta_hedging/
+
+I was reading "trading volatility" by Bennett, the part about replacing a long stock position with calls of equal delta, and it says:
+
+  
+“As a call option is convex, this means that the delta increases as spot increases and vice versa. If a long position in the underlying is sold and 
+replaced with...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+12. Is there Indicator for waiting/pending order price levels
+↑ 0 upvotes  •  1 comments  •  50% upvoted  •  u/Quickbrownfox1217
+https://www.reddit.com/r/options/comments/1qoju67/is_there_indicator_for_waitingpending_order_price/
+
+I saw someone on instagram using an indictor that shows large pending order price levels. Does anyone know what this indicator is? I use think or 
+swim . Thanks in advance
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+13. MarketWatch Investing Game
+↑ 0 upvotes  •  1 comments  •  50% upvoted  •  u/Sanspyer69
+https://www.reddit.com/r/options/comments/1qnrawq/marketwatch_investing_game/
+
+Hello, In my economics class we are playing the stock market game where we have been given $100,000 but we have to make all our buys on day 1 and 
+CANNOT touch the money after that. We can have up to 5 stocks or just one. 
+
+Any suggestions on what funds/stocks to put the money in that has the highest...
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+14. The hardest part of options trading.
+↑ 0 upvotes  •  8 comments  •  43% upvoted  •  u/fightthefascists
+https://www.reddit.com/r/options/comments/1qokdjm/the_hardest_part_of_options_trading/
+
+For me it’s always been when to sell especially when holding a profitable trade that made major gains ahead of your expectations. I’m currently 
+holding 4 MSFT calls that I was planning on holding through earnings (two 450, one 460, one 470 all expire 1/30) but 2 of them are already above 
+200% gains....
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+15. Is SMB Capital a Reliable Source for Options Trading?
+↑ 0 upvotes  •  11 comments  •  50% upvoted  •  u/BagNo8671
+https://www.reddit.com/r/options/comments/1qo5lnt/is_smb_capital_a_reliable_source_for_options/
+
+I’ve been watching the[ SMB Capital](https://www.youtube.com/smbcapital/videos) YT lately — they post a lot of content about options trading, 
+strategies, and market insights. Before I dive deeper or consider I wanted to ask:
+
+* Is SMB Capital a legit options trading channel?
+* Has anyone here follow...
+
+════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
