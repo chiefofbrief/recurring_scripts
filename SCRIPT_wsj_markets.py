@@ -9,18 +9,23 @@ Installation:
     pip install curl_cffi beautifulsoup4 rich html2text lxml
 
 Usage:
-    python SCRIPT_wsj_markets.py              # Show all articles with full content (default)
-    python SCRIPT_wsj_markets.py --summary    # Show top 10 headlines only
-    python SCRIPT_wsj_markets.py --count 3    # Show top 3 articles with full content
+    python SCRIPT_wsj_markets.py                    # Show 50 articles from past 1 day with full content (default)
+    python SCRIPT_wsj_markets.py --summary          # Show top 10 headlines from past 1 day
+    python SCRIPT_wsj_markets.py --count 3          # Show top 3 articles with full content
     python SCRIPT_wsj_markets.py --summary --count 15  # Show top 15 headlines
+    python SCRIPT_wsj_markets.py --days 0           # Filter to today only
+    python SCRIPT_wsj_markets.py --days 7           # Filter to articles from past 7 days
+    python SCRIPT_wsj_markets.py --days 999         # Show all available articles (no date filtering)
 
 Features:
     - Automatically fetches the latest market news from WSJ RSS feed
     - Bypasses potential restrictions using curl_cffi
     - Beautiful terminal formatting with rich markup
     - Converts HTML descriptions to readable, formatted text
-    - Shows all articles by default with optional --summary flag for headlines only
+    - Defaults to 50 articles from past 1 day (today + yesterday)
+    - Optional --summary flag for headlines only (top 10)
     - Configurable article count with --count flag
+    - Date filtering with --days flag (default: 1 day)
     - No authentication or API keys required
 
 Requirements:
@@ -73,6 +78,8 @@ except ImportError:
 RSS_FEED_URL = "https://feeds.content.dowjones.io/public/rss/RSSMarketsMain"
 REQUEST_TIMEOUT = 30  # seconds
 DEFAULT_SUMMARY_COUNT = 10  # Number of headlines to show in summary mode
+DEFAULT_DAYS = 1  # Default number of days to filter articles (today + yesterday)
+DEFAULT_COUNT = 50  # Default number of articles in full mode
 
 # ============================================================================
 # HELPER FUNCTIONS
@@ -187,6 +194,81 @@ def format_date(date_str):
 
     # If all parsing fails, return original
     return date_str
+
+
+def parse_article_date(date_str):
+    """
+    Parse article date string to datetime object for filtering.
+
+    Args:
+        date_str (str): Date string from RSS feed
+
+    Returns:
+        datetime: Parsed datetime object, or None if parsing fails
+    """
+    try:
+        # RSS feeds typically use RFC 2822 format
+        # Example: "Wed, 22 Jan 2026 10:30:00 GMT"
+        dt = datetime.strptime(date_str, '%a, %d %b %Y %H:%M:%S %Z')
+        return dt
+    except:
+        pass
+
+    try:
+        # Try alternative format without timezone
+        dt = datetime.strptime(date_str, '%a, %d %b %Y %H:%M:%S')
+        return dt
+    except:
+        pass
+
+    try:
+        # Try parsing with more flexible timezone handling
+        # Remove timezone abbreviations and parse
+        date_clean = re.sub(r'\s+[A-Z]{3,4}$', '', date_str)
+        dt = datetime.strptime(date_clean, '%a, %d %b %Y %H:%M:%S')
+        return dt
+    except:
+        pass
+
+    # If all parsing fails, return None
+    return None
+
+
+def filter_articles_by_days(articles, days=None):
+    """
+    Filter articles to only include those from the past N days.
+
+    Args:
+        articles (list): List of article dictionaries
+        days (int): Number of days to include (None = no filtering)
+
+    Returns:
+        list: Filtered list of articles
+    """
+    if days is None:
+        return articles
+
+    # Calculate cutoff date (today minus N days)
+    cutoff_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    cutoff_date = cutoff_date.replace(day=cutoff_date.day - days)
+
+    filtered = []
+    for article in articles:
+        article_date = parse_article_date(article.get('pubDate', ''))
+
+        # If we can't parse the date, include it (fail-open)
+        if article_date is None:
+            filtered.append(article)
+            continue
+
+        # Remove timezone info for comparison
+        article_date_naive = article_date.replace(tzinfo=None)
+
+        # Include if article is newer than cutoff
+        if article_date_naive >= cutoff_date:
+            filtered.append(article)
+
+    return filtered
 
 
 def html_to_formatted_text(html_content):
@@ -339,7 +421,14 @@ def main():
     parser.add_argument(
         '--count',
         type=int,
-        help=f'Number of articles to display (default: all articles for full mode, {DEFAULT_SUMMARY_COUNT} for summary)'
+        default=DEFAULT_COUNT,
+        help=f'Number of articles to display (default: {DEFAULT_COUNT} for full mode, {DEFAULT_SUMMARY_COUNT} for summary)'
+    )
+    parser.add_argument(
+        '--days',
+        type=int,
+        default=DEFAULT_DAYS,
+        help=f'Filter articles to only include those from the past N days (default: {DEFAULT_DAYS} for today + yesterday)'
     )
     args = parser.parse_args()
 
@@ -358,7 +447,14 @@ def main():
             console.print("[yellow]No articles found in the feed.[/yellow]")
             return 1
 
-        # Step 3: Display articles
+        # Step 3: Filter articles by date if requested
+        if args.days is not None:
+            articles = filter_articles_by_days(articles, args.days)
+            if not articles:
+                console.print(f"[yellow]No articles found from the past {args.days} day(s).[/yellow]")
+                return 1
+
+        # Step 4: Display articles
         display_articles(articles, summary_only=args.summary, count=args.count, console=console)
 
         return 0
