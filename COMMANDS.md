@@ -1,5 +1,13 @@
 # Commands
 
+## Setup
+
+```bash
+pip install tabulate requests rich curl_cffi beautifulsoup4 html2text lxml python-dateutil
+```
+
+---
+
 ## Quick Workflow
 
 ### 1. Collect Stock Market News
@@ -110,11 +118,3 @@ API Budget: 4 calls per stock (TIME_SERIES_MONTHLY_ADJUSTED, EARNINGS, EARNINGS_
 Output: `screening_YYYY-MM-DD.md`
 
 Requires: `ALPHAVANTAGE_API_KEY`
-
----
-
-## Setup
-
-```bash
-pip install tabulate requests rich curl_cffi beautifulsoup4 html2text lxml python-dateutil
-```
