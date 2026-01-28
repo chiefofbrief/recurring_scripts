@@ -15,7 +15,7 @@ pip install tabulate requests rich curl_cffi beautifulsoup4 html2text lxml pytho
 Runs losers, Barron's, WSJ, and Reddit. Saves to timestamped file.
 
 ```bash
-(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py && python SCRIPT_wsj_markets.py && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' > "stockmarket_$(date +%Y-%m-%d).txt"
+(python SCRIPT_losers_actives.py && python SCRIPT_barrons_news.py --days 1 && python SCRIPT_wsj_markets.py --days 1 && python SCRIPT_reddit_top_posts.py) 2>&1 | sed 's/\x1b\[[0-9;]*m//g' > "stockmarket_$(date +%Y-%m-%d).txt"
 ```
 
 ### 2. Analyze News (Claude/Gemini Prompt)
@@ -68,10 +68,11 @@ Requires: `PERIGON_API_KEY`
 ### SCRIPT_wsj_markets.py
 WSJ Markets news via RSS.
 ```bash
-python SCRIPT_wsj_markets.py [--summary] [--count N]
+python SCRIPT_wsj_markets.py [--summary] [--count N] [--days N]
 ```
 - `--summary` — Headlines only
 - `--count N` — Limit articles
+- `--days N` — Filter to articles from past N days (e.g., `--days 1` for today + yesterday)
 
 ### SCRIPT_reddit_top_posts.py
 Top posts from finance subreddits.
