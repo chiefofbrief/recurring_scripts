@@ -218,6 +218,10 @@ def fetch_screening_data(ticker):
             if isinstance(result, dict):
                 top_keys = list(result.keys())[:5]  # First 5 keys
                 console.print(f"    Response keys: {', '.join(top_keys)}")
+
+                # If we got an Information key, show the message
+                if 'Information' in result:
+                    console.print(f"    [yellow]Information message: {result['Information'][:100]}...[/yellow]")
         else:
             console.print(f"  [red]✗ {key} failed (no data returned)[/red]")
             data[key] = None
@@ -1446,7 +1450,7 @@ def main():
 
     all_results = {}
 
-    for ticker in tickers:
+    for i, ticker in enumerate(tickers):
         data = fetch_screening_data(ticker)
 
         results = {}
@@ -1476,6 +1480,16 @@ def main():
         )
 
         all_results[ticker] = results
+
+        # Rate limit delay between tickers (skip after last ticker)
+        # Alpha Vantage free tier: 5 calls/minute
+        # Each ticker = 4 calls, so we need to ensure we don't exceed 5 calls in 60s
+        # With 12s delay between endpoints: 4 calls take ~36s
+        # We need to wait at least 24s before starting the next ticker to ensure
+        # the next ticker's 1st call is >=60s after this ticker's 1st call
+        if i < len(tickers) - 1:
+            console.print(f"\n  [cyan]Waiting 24s before fetching next ticker (rate limit protection)...[/cyan]\n")
+            time.sleep(24)
 
     # Generate report
     filename = generate_screening_report(tickers, all_results)
