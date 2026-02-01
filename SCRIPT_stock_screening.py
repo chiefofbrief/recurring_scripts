@@ -213,12 +213,18 @@ def fetch_screening_data(ticker):
         if result:
             data[key] = result
             console.print(f"  [green]✓ {key} received[/green]")
+
+            # Log what keys we got back for debugging
+            if isinstance(result, dict):
+                top_keys = list(result.keys())[:5]  # First 5 keys
+                console.print(f"    Response keys: {', '.join(top_keys)}")
         else:
-            console.print(f"  [red]✗ {key} failed[/red]")
+            console.print(f"  [red]✗ {key} failed (no data returned)[/red]")
             data[key] = None
 
         # Rate limit delay (skip after last call)
         if i < len(endpoints) - 1:
+            console.print(f"  Waiting {API_DELAY}s before next request...")
             time.sleep(API_DELAY)
 
     return data
@@ -230,10 +236,13 @@ def fetch_screening_data(ticker):
 def calculate_price_stats(price_data):
     """Calculate price trend statistics from monthly adjusted data"""
     if not price_data:
+        console.print("  [yellow]Warning: No price data provided[/yellow]")
         return None
 
     time_series = price_data.get('Monthly Adjusted Time Series', {})
     if not time_series:
+        console.print(f"  [yellow]Warning: No 'Monthly Adjusted Time Series' key in price data[/yellow]")
+        console.print(f"  Available keys: {list(price_data.keys())}")
         return None
 
     # Extract monthly adjusted closes sorted by date (newest first)
@@ -918,6 +927,59 @@ def build_annual_table(years, values, unit, current_label=None, current_val=None
     return headers, row_vals
 
 
+def build_inline_delta_table(years, values, unit, current_label=None, current_val=None, metric_name='Value'):
+    """Build inline delta table with Year | Value | Δ% | Year | Value | Δ% format
+
+    Args:
+        years: List of year strings
+        values: List of values corresponding to years
+        unit: Unit for formatting ('dollars', 'percent', etc.)
+        current_label: Optional label for current/TTM value
+        current_val: Optional current/TTM value
+        metric_name: Name of the metric for the first column
+
+    Returns:
+        Markdown table string with inline deltas
+    """
+    if not years or not values:
+        return "*No data available*"
+
+    # Build header row
+    headers = ['Year']
+    row = [metric_name]
+
+    for i, (year, val) in enumerate(zip(years, values)):
+        # Add year/value
+        headers.extend([year, 'Δ%'])
+        row.append(fmt_val(val, unit))
+
+        # Calculate delta from previous year
+        if i > 0 and values[i-1] is not None and val is not None and values[i-1] != 0:
+            delta_pct = round(((val - values[i-1]) / abs(values[i-1])) * 100, 2)
+            row.append(fmt_val(delta_pct, 'percent', is_delta=True))
+        else:
+            row.append('—')
+
+    # Add current/TTM column if provided
+    if current_label and current_val is not None:
+        headers.extend([current_label + '*', 'Δ%*'])
+        row.append(fmt_val(current_val, unit))
+
+        # Delta vs most recent year
+        if values and values[-1] is not None and values[-1] != 0:
+            delta_pct = round(((current_val - values[-1]) / abs(values[-1])) * 100, 2)
+            row.append(fmt_val(delta_pct, 'percent', is_delta=True))
+        else:
+            row.append('—')
+
+    # Remove the last Δ% column header (doesn't make sense for final value)
+    if headers[-1] == 'Δ%' or headers[-1] == 'Δ%*':
+        headers = headers[:-1]
+        row = row[:-1]
+
+    return tabulate([row], headers=headers, tablefmt="pipe")
+
+
 def generate_yoy_trend_chart(trend_points):
     """Generate a markdown table showing YoY % change trends for all metrics.
 
@@ -930,8 +992,8 @@ def generate_yoy_trend_chart(trend_points):
     if not trend_points:
         return "*Insufficient data for YoY trend chart*"
 
-    # Limit to most recent data points (last 20 for readability)
-    display_points = trend_points[-20:] if len(trend_points) > 20 else trend_points
+    # Limit to most recent data points (last 12 for readability)
+    display_points = trend_points[-12:] if len(trend_points) > 12 else trend_points
 
     headers = ["Period", "Date", "Price YoY %", "EPS YoY %", "Revenue YoY %", "Op Margin YoY pp"]
     rows = []
@@ -983,68 +1045,29 @@ def generate_screening_report(tickers, all_results):
         lines.append(f"## {ticker}")
         lines.append("")
 
-        # ==== SUMMARY ====
-        lines.append("### Summary")
-        lines.append("")
-
-        # Summary table
-        summary_headers = ["Metric", "YoY", "3M / Prev Q", "5yr CAGR"]
-        summary_rows = []
+        # ==== HEADER BLOCK ====
+        # Build header line with key metrics
+        header_parts = []
 
         if price:
-            summary_rows.append([
-                "Price",
-                fmt_val(price.get('vs_yoy_pct'), 'percent', True),
-                fmt_val(price.get('vs_3mo_pct'), 'percent', True),
-                fmt_val(price.get('cagr_5yr'), 'percent'),
-            ])
+            header_parts.append(f"**Current Price:** {fmt_val(price['current'], 'dollars')} (as of {price['current_date']})")
         else:
-            summary_rows.append(["Price", "—", "—", "—"])
+            header_parts.append("**Current Price:** —")
 
-        if eps:
-            summary_rows.append([
-                "EPS",
-                fmt_val(eps.get('vs_yoy_pct'), 'percent', True),
-                fmt_val(eps.get('vs_prev_q_pct'), 'percent', True),
-                fmt_val(eps.get('cagr_5yr'), 'percent'),
-            ])
+        if eps and eps.get('ttm') is not None:
+            header_parts.append(f"**TTM EPS:** {fmt_val(eps['ttm'], 'dollars')}")
         else:
-            summary_rows.append(["EPS", "—", "—", "—"])
+            header_parts.append("**TTM EPS:** —")
 
-        if revenue:
-            summary_rows.append([
-                "Revenue",
-                fmt_val(revenue.get('vs_yoy_pct'), 'percent', True),
-                fmt_val(revenue.get('vs_prev_q_pct'), 'percent', True),
-                fmt_val(revenue.get('cagr_5yr'), 'percent'),
-            ])
+        if pe and pe.get('trailing_pe') is not None:
+            header_parts.append(f"**Trailing P/E:** {fmt_val(pe['trailing_pe'], 'ratio')}")
         else:
-            summary_rows.append(["Revenue", "—", "—", "—"])
+            header_parts.append("**Trailing P/E:** —")
 
-        if margin:
-            summary_rows.append([
-                "Op. Margin",
-                fmt_val(margin.get('vs_yoy_pct'), 'percent', True),
-                fmt_val(margin.get('vs_prev_q_pct'), 'percent', True),
-                fmt_val(margin.get('cagr_5yr'), 'percent'),
-            ])
-        else:
-            summary_rows.append(["Op. Margin", "—", "—", "—"])
-
-        lines.append(tabulate(summary_rows, headers=summary_headers, tablefmt="pipe"))
+        lines.append(' | '.join(header_parts))
         lines.append("")
 
-        # P/E summary line
-        if pe:
-            pe_parts = [f"Trailing {fmt_val(pe['trailing_pe'], 'ratio')}"]
-            pe_parts.append(f"YoY {fmt_val(pe['vs_yoy_pct'], 'percent', True)}")
-            pe_parts.append(f"vs 5yr Avg ({fmt_val(pe['mean_5yr'], 'ratio')}): {fmt_val(pe['vs_5yr_avg_pct'], 'percent', True)}")
-            lines.append(f"**P/E:** {' | '.join(pe_parts)}")
-        else:
-            lines.append("**P/E:** —")
-        lines.append("")
-
-        # Price-EPS Correlation
+        # Price-EPS Correlation on second line
         price_eps_corr = results.get('price_eps_correlation')
         if price_eps_corr is not None:
             # Interpret correlation
@@ -1062,21 +1085,76 @@ def generate_screening_report(tickers, all_results):
         else:
             lines.append("**Price-EPS Correlation (5yr):** —")
         lines.append("")
+        lines.append("---")
+        lines.append("")
 
-        # Estimates summary line
-        if estimates:
-            nq = estimates.get('next_quarter')
-            if nq and nq.get('eps_avg') is not None:
-                est_parts = [f"Latest actual EPS {fmt_val(estimates['latest_actual_eps'], 'dollars')}"]
-                est_parts.append(f"Next Q consensus {fmt_val(nq['eps_avg'], 'dollars')}")
-                est_parts.append(f"Delta {fmt_val(estimates['delta_actual_vs_next_q_pct'], 'percent', True)}")
-                if nq.get('analyst_count'):
-                    est_parts.append(f"{int(nq['analyst_count'])} analysts")
-                lines.append(f"**Estimates:** {' | '.join(est_parts)}")
-            else:
-                lines.append("**Estimates:** —")
+        # ==== SUMMARY TABLE ====
+        lines.append("### Summary")
+        lines.append("")
+
+        # Enhanced summary table with more columns
+        summary_headers = ["Metric", "Current", "5-Yr Avg", "CAGR", "YoY Δ%", "3M/QoQ Δ%", "CV", "Slope"]
+        summary_rows = []
+
+        if price:
+            summary_rows.append([
+                "Price",
+                fmt_val(price.get('current'), 'dollars'),
+                fmt_val(price.get('mean_5yr'), 'dollars'),
+                fmt_val(price.get('cagr_5yr'), 'percent'),
+                fmt_val(price.get('vs_yoy_pct'), 'percent', True),
+                fmt_val(price.get('vs_3mo_pct'), 'percent', True),
+                fmt_val(price.get('cv'), 'percent'),
+                fmt_val(price.get('slope'), 'ratio'),
+            ])
         else:
-            lines.append("**Estimates:** —")
+            summary_rows.append(["Price", "—", "—", "—", "—", "—", "—", "—"])
+
+        if eps:
+            summary_rows.append([
+                "EPS",
+                fmt_val(eps.get('ttm'), 'dollars'),
+                fmt_val(eps.get('mean_5yr'), 'dollars'),
+                fmt_val(eps.get('cagr_5yr'), 'percent'),
+                fmt_val(eps.get('vs_yoy_pct'), 'percent', True),
+                fmt_val(eps.get('vs_prev_q_pct'), 'percent', True),
+                fmt_val(eps.get('cv'), 'percent'),
+                fmt_val(eps.get('slope'), 'ratio'),
+            ])
+        else:
+            summary_rows.append(["EPS", "—", "—", "—", "—", "—", "—", "—"])
+
+        if revenue:
+            summary_rows.append([
+                "Revenue",
+                fmt_val(revenue.get('latest'), 'dollars_large'),
+                fmt_val(revenue.get('mean_5yr'), 'dollars_large'),
+                fmt_val(revenue.get('cagr_5yr'), 'percent'),
+                fmt_val(revenue.get('vs_yoy_pct'), 'percent', True),
+                fmt_val(revenue.get('vs_prev_q_pct'), 'percent', True),
+                fmt_val(revenue.get('cv'), 'percent'),
+                fmt_val(revenue.get('slope'), 'ratio'),
+            ])
+        else:
+            summary_rows.append(["Revenue", "—", "—", "—", "—", "—", "—", "—"])
+
+        if margin:
+            summary_rows.append([
+                "Op. Margin",
+                fmt_val(margin.get('latest'), 'percent'),
+                fmt_val(margin.get('mean_5yr'), 'percent'),
+                fmt_val(margin.get('cagr_5yr'), 'percent'),
+                fmt_val(margin.get('vs_yoy_pct'), 'percent', True) + 'pp' if margin.get('vs_yoy_pct') is not None else "—",
+                fmt_val(margin.get('vs_prev_q_pct'), 'percent', True) + 'pp' if margin.get('vs_prev_q_pct') is not None else "—",
+                fmt_val(margin.get('cv'), 'percent'),
+                fmt_val(margin.get('slope'), 'ratio'),
+            ])
+        else:
+            summary_rows.append(["Op. Margin", "—", "—", "—", "—", "—", "—", "—"])
+
+        lines.append(tabulate(summary_rows, headers=summary_headers, tablefmt="pipe"))
+        lines.append("")
+        lines.append("---")
         lines.append("")
 
         # YoY Trend Chart
@@ -1084,188 +1162,205 @@ def generate_screening_report(tickers, all_results):
         if yoy_trend:
             lines.append("### YoY Trend Analysis")
             lines.append("")
-            lines.append("*Year-over-year % changes (Quarterly and Annual). Shows whether metrics are moving together.*")
+            lines.append("*Year-over-year % changes (last 12 periods). Shows how metrics move together and diverge.*")
             lines.append("")
             lines.append(generate_yoy_trend_chart(yoy_trend))
+            lines.append("")
+            lines.append("---")
             lines.append("")
 
         # ==== PRICE TREND ====
         lines.append("### Price Trend")
         lines.append("")
         if price and price.get('annual_years'):
-            # Annual values table
-            headers, row = build_annual_table(
+            # Inline delta table
+            lines.append(build_inline_delta_table(
                 price['annual_years'], price['annual_values'], 'dollars',
-                'Current', price['current']
-            )
-            row = ['Price'] + row
-            headers = [''] + headers[1:]  # Remove empty first col, use '' for tabulate
-            lines.append(tabulate([row], headers=headers, tablefmt="pipe"))
+                'Current', price['current'], 'Price'
+            ))
+            lines.append("")
+            lines.append(f"*Current as of {price['current_date']}*")
             lines.append("")
 
-            # Stats table
-            stat_headers = ["Current", "5yr Mean", "5yr CAGR", "YoY", "3M", "CV", "Slope", "52w High", "52w Low", "Outliers"]
-            stat_row = [
-                fmt_val(price['current'], 'dollars'),
-                fmt_val(price['mean_5yr'], 'dollars'),
-                fmt_val(price['cagr_5yr'], 'percent'),
-                fmt_val(price['vs_yoy_pct'], 'percent', True),
-                fmt_val(price['vs_3mo_pct'], 'percent', True),
-                fmt_val(price['cv'], 'percent'),
-                fmt_val(price['slope'], 'ratio'),
-                f"{fmt_val(price['high_52w'], 'dollars')} ({fmt_val(price['vs_52w_high_pct'], 'percent', True)})",
-                f"{fmt_val(price['low_52w'], 'dollars')} ({fmt_val(price['vs_52w_low_pct'], 'percent', True)})",
-                ', '.join(price['annual_outliers']) or 'None'
+            # Stats summary line
+            stats_parts = [
+                f"5-Yr Avg {fmt_val(price['mean_5yr'], 'dollars')}",
+                f"CAGR {fmt_val(price['cagr_5yr'], 'percent')}",
+                f"CV {fmt_val(price['cv'], 'percent')}",
+                f"Slope {fmt_val(price['slope'], 'ratio')}",
+                f"52w High {fmt_val(price['high_52w'], 'dollars')} ({fmt_val(price['vs_52w_high_pct'], 'percent', True)})",
+                f"52w Low {fmt_val(price['low_52w'], 'dollars')} ({fmt_val(price['vs_52w_low_pct'], 'percent', True)})",
             ]
-            lines.append(tabulate([stat_row], headers=stat_headers, tablefmt="pipe"))
+            outliers = ', '.join(price['annual_outliers']) or 'None'
+            stats_parts.append(f"Outliers: {outliers}")
+            lines.append("**Stats:** " + ' | '.join(stats_parts))
         else:
             lines.append("*No price data available*")
+        lines.append("")
+        lines.append("---")
         lines.append("")
 
         # ==== EPS TREND ====
         lines.append("### EPS Trend")
         lines.append("")
         if eps and eps.get('annual_years'):
-            headers, row = build_annual_table(
+            # Inline delta table
+            lines.append(build_inline_delta_table(
                 eps['annual_years'], eps['annual_values'], 'dollars',
-                'TTM', eps['ttm']
-            )
-            row = ['EPS'] + row
-            headers = [''] + headers[1:]
-            lines.append(tabulate([row], headers=headers, tablefmt="pipe"))
+                'TTM', eps['ttm'], 'EPS'
+            ))
+            lines.append("")
+            lines.append(f"*TTM through {eps['latest_date']}*")
             lines.append("")
 
-            stat_headers = ["Latest Q", "5yr Mean", "5yr CAGR", "YoY", "Prev Q", "CV", "Slope", "Outliers"]
-            stat_row = [
-                fmt_val(eps['latest'], 'dollars'),
-                fmt_val(eps['mean_5yr'], 'dollars'),
-                fmt_val(eps['cagr_5yr'], 'percent'),
-                fmt_val(eps['vs_yoy_pct'], 'percent', True),
-                fmt_val(eps['vs_prev_q_pct'], 'percent', True),
-                fmt_val(eps['cv'], 'percent'),
-                fmt_val(eps['slope'], 'ratio'),
-                ', '.join(eps['outlier_years']) or 'None'
+            # Stats summary line
+            stats_parts = [
+                f"Latest Q {fmt_val(eps['latest'], 'dollars')}",
+                f"5-Yr Avg {fmt_val(eps['mean_5yr'], 'dollars')}",
+                f"CAGR {fmt_val(eps['cagr_5yr'], 'percent')}",
+                f"CV {fmt_val(eps['cv'], 'percent')}",
+                f"Slope {fmt_val(eps['slope'], 'ratio')}",
             ]
-            lines.append(tabulate([stat_row], headers=stat_headers, tablefmt="pipe"))
+            outliers = ', '.join(eps['outlier_years']) or 'None'
+            stats_parts.append(f"Outliers: {outliers}")
+            lines.append("**Stats:** " + ' | '.join(stats_parts))
         else:
             lines.append("*No EPS data available*")
+        lines.append("")
+        lines.append("---")
         lines.append("")
 
         # ==== REVENUE TREND ====
         lines.append("### Revenue Trend")
         lines.append("")
         if revenue and revenue.get('annual_years'):
+            # Determine current label and value
             current_label = None
             current_val = None
             if revenue.get('ytd_annualized'):
                 current_label = f"YTD Ann. ({revenue['ytd_num_quarters']}Q)"
                 current_val = revenue['ytd_annualized']
 
-            headers, row = build_annual_table(
+            # Inline delta table
+            lines.append(build_inline_delta_table(
                 revenue['annual_years'], revenue['annual_values'], 'dollars_large',
-                current_label, current_val
-            )
-            row = ['Revenue'] + row
-            headers = [''] + headers[1:]
-            lines.append(tabulate([row], headers=headers, tablefmt="pipe"))
+                current_label, current_val, 'Revenue'
+            ))
             lines.append("")
+            if current_label:
+                lines.append(f"*{current_label} annualized based on YTD data*")
+                lines.append("")
 
-            stat_headers = ["Latest", "5yr Mean", "5yr CAGR", "YoY", "Prev Q", "CV", "Slope", "Outliers"]
-            stat_row = [
-                fmt_val(revenue['latest'], 'dollars_large'),
-                fmt_val(revenue['mean_5yr'], 'dollars_large'),
-                fmt_val(revenue['cagr_5yr'], 'percent'),
-                fmt_val(revenue['vs_yoy_pct'], 'percent', True),
-                fmt_val(revenue['vs_prev_q_pct'], 'percent', True),
-                fmt_val(revenue['cv'], 'percent'),
-                fmt_val(revenue['slope'], 'ratio'),
-                ', '.join(revenue['outlier_years']) or 'None'
+            # Stats summary line
+            stats_parts = [
+                f"Latest {fmt_val(revenue['latest'], 'dollars_large')}",
+                f"5-Yr Avg {fmt_val(revenue['mean_5yr'], 'dollars_large')}",
+                f"CAGR {fmt_val(revenue['cagr_5yr'], 'percent')}",
+                f"CV {fmt_val(revenue['cv'], 'percent')}",
+                f"Slope {fmt_val(revenue['slope'], 'ratio')}",
             ]
-            lines.append(tabulate([stat_row], headers=stat_headers, tablefmt="pipe"))
+            outliers = ', '.join(revenue['outlier_years']) or 'None'
+            stats_parts.append(f"Outliers: {outliers}")
+            lines.append("**Stats:** " + ' | '.join(stats_parts))
         else:
             lines.append("*No revenue data available*")
+        lines.append("")
+        lines.append("---")
         lines.append("")
 
         # ==== OPERATING MARGIN TREND ====
         lines.append("### Operating Margin Trend")
         lines.append("")
         if margin and margin.get('annual_years'):
+            # Determine current label and value
             current_label = None
             current_val = None
             if margin.get('ytd_margin') is not None:
                 current_label = f"YTD ({margin['ytd_num_quarters']}Q)"
                 current_val = margin['ytd_margin']
 
-            headers, row = build_annual_table(
+            # Inline delta table
+            lines.append(build_inline_delta_table(
                 margin['annual_years'], margin['annual_values'], 'percent',
-                current_label, current_val
-            )
-            row = ['Op. Margin'] + row
-            headers = [''] + headers[1:]
-            lines.append(tabulate([row], headers=headers, tablefmt="pipe"))
+                current_label, current_val, 'Op. Margin'
+            ))
             lines.append("")
+            if current_label:
+                lines.append(f"*{current_label} based on YTD data. Δ% shows percentage point changes.*")
+                lines.append("")
 
-            stat_headers = ["Latest", "5yr Mean", "5yr CAGR", "YoY (pp)", "Prev Q (pp)", "CV", "Slope", "Outliers"]
-            stat_row = [
-                fmt_val(margin['latest'], 'percent'),
-                fmt_val(margin['mean_5yr'], 'percent'),
-                fmt_val(margin['cagr_5yr'], 'percent'),
-                fmt_val(margin['vs_yoy_pct'], 'percent', True),
-                fmt_val(margin['vs_prev_q_pct'], 'percent', True),
-                fmt_val(margin['cv'], 'percent'),
-                fmt_val(margin['slope'], 'ratio'),
-                ', '.join(margin['outlier_years']) or 'None'
+            # Stats summary line
+            stats_parts = [
+                f"Latest {fmt_val(margin['latest'], 'percent')}",
+                f"5-Yr Avg {fmt_val(margin['mean_5yr'], 'percent')}",
+                f"CAGR {fmt_val(margin['cagr_5yr'], 'percent')}",
+                f"CV {fmt_val(margin['cv'], 'percent')}",
+                f"Slope {fmt_val(margin['slope'], 'ratio')}",
             ]
-            lines.append(tabulate([stat_row], headers=stat_headers, tablefmt="pipe"))
+            outliers = ', '.join(margin['outlier_years']) or 'None'
+            stats_parts.append(f"Outliers: {outliers}")
+            lines.append("**Stats:** " + ' | '.join(stats_parts))
         else:
             lines.append("*No operating margin data available*")
+        lines.append("")
+        lines.append("---")
         lines.append("")
 
         # ==== P/E TREND ====
         lines.append("### P/E Trend")
         lines.append("")
         if pe and pe.get('annual_years'):
-            headers, row = build_annual_table(
+            # Inline delta table
+            lines.append(build_inline_delta_table(
                 pe['annual_years'], pe['annual_values'], 'ratio',
-                'Trailing', pe['trailing_pe']
-            )
-            row = ['P/E'] + row
-            headers = [''] + headers[1:]
-            lines.append(tabulate([row], headers=headers, tablefmt="pipe"))
+                'Trailing', pe['trailing_pe'], 'P/E'
+            ))
+            lines.append("")
+            lines.append(f"*Trailing P/E based on current price ({fmt_val(pe['current_price'], 'dollars')}) and TTM EPS ({fmt_val(pe['ttm_eps'], 'dollars')})*")
             lines.append("")
 
-            stat_headers = ["Trailing", "5yr Mean", "vs 5yr Avg", "YoY", "CV", "Slope", "Outliers"]
-            stat_row = [
-                fmt_val(pe['trailing_pe'], 'ratio'),
-                fmt_val(pe['mean_5yr'], 'ratio'),
-                fmt_val(pe['vs_5yr_avg_pct'], 'percent', True),
-                fmt_val(pe['vs_yoy_pct'], 'percent', True),
-                fmt_val(pe['cv'], 'percent'),
-                fmt_val(pe['slope'], 'ratio'),
-                ', '.join(pe['outlier_years']) or 'None'
+            # Stats summary line
+            stats_parts = [
+                f"Trailing {fmt_val(pe['trailing_pe'], 'ratio')}",
+                f"5-Yr Avg {fmt_val(pe['mean_5yr'], 'ratio')}",
+                f"vs 5yr Avg {fmt_val(pe['vs_5yr_avg_pct'], 'percent', True)}",
+                f"CV {fmt_val(pe['cv'], 'percent')}",
+                f"Slope {fmt_val(pe['slope'], 'ratio')}",
             ]
-            lines.append(tabulate([stat_row], headers=stat_headers, tablefmt="pipe"))
+            outliers = ', '.join(pe['outlier_years']) or 'None'
+            stats_parts.append(f"Outliers: {outliers}")
+            lines.append("**Stats:** " + ' | '.join(stats_parts))
         else:
             lines.append("*No P/E data available (negative or insufficient earnings)*")
         lines.append("")
+        lines.append("---")
+        lines.append("")
 
-        # ==== EPS ESTIMATES ====
-        lines.append("### EPS Estimates")
+        # ==== ESTIMATES & CONSENSUS ====
+        lines.append("### Estimates & Consensus")
         lines.append("")
         if estimates:
             if estimates.get('latest_actual_eps') is not None:
                 lines.append(f"**Latest Actual EPS:** {fmt_val(estimates['latest_actual_eps'], 'dollars')}")
                 lines.append("")
 
-            # EPS estimates table
-            est_headers = ["Horizon", "Consensus", "Low", "High", "Analysts", "30d Revision"]
+            # Combined EPS and Revenue estimates table
+            est_headers = ["Horizon", "EPS Consensus", "Range (Low-High)", "Analysts", "30d Rev", "Revenue Consensus", "Revenue Range"]
             est_rows = []
             for est in [estimates.get('next_quarter'), estimates.get('current_fiscal_year'), estimates.get('next_fiscal_year')]:
-                if est and est.get('eps_avg') is not None:
+                if est and (est.get('eps_avg') is not None or est.get('revenue_avg') is not None):
                     label = est.get('horizon', '—')
                     date = est.get('date', '')
 
-                    # 30d revision direction
+                    # EPS data
+                    eps_consensus = fmt_val(est.get('eps_avg'), 'dollars')
+                    eps_range = "—"
+                    if est.get('eps_low') is not None and est.get('eps_high') is not None:
+                        eps_range = f"{fmt_val(est['eps_low'], 'dollars')} - {fmt_val(est['eps_high'], 'dollars')}"
+
+                    analysts = int(est['analyst_count']) if est.get('analyst_count') else '—'
+
+                    # 30d revision
                     rev_30d = "—"
                     if est.get('revision_30d') is not None and est.get('eps_avg') is not None:
                         diff = round(est['eps_avg'] - est['revision_30d'], 4)
@@ -1274,44 +1369,30 @@ def generate_screening_report(tickers, all_results):
                         else:
                             rev_30d = "flat"
 
+                    # Revenue data
+                    rev_consensus = fmt_val(est.get('revenue_avg'), 'dollars_large')
+                    rev_range = "—"
+                    if est.get('revenue_low') is not None and est.get('revenue_high') is not None:
+                        rev_range = f"{fmt_val(est['revenue_low'], 'dollars_large')} - {fmt_val(est['revenue_high'], 'dollars_large')}"
+
                     est_rows.append([
                         f"{label} ({date})",
-                        fmt_val(est['eps_avg'], 'dollars'),
-                        fmt_val(est['eps_low'], 'dollars'),
-                        fmt_val(est['eps_high'], 'dollars'),
-                        int(est['analyst_count']) if est.get('analyst_count') else '—',
-                        rev_30d
+                        eps_consensus,
+                        eps_range,
+                        analysts,
+                        rev_30d,
+                        rev_consensus,
+                        rev_range
                     ])
 
             if est_rows:
                 lines.append(tabulate(est_rows, headers=est_headers, tablefmt="pipe"))
                 lines.append("")
 
-            # Revenue estimates table
-            rev_headers = ["Horizon", "Consensus", "Low", "High", "Analysts"]
-            rev_rows = []
-            for est in [estimates.get('next_quarter'), estimates.get('current_fiscal_year'), estimates.get('next_fiscal_year')]:
-                if est and est.get('revenue_avg') is not None:
-                    label = est.get('horizon', '—')
-                    date = est.get('date', '')
-                    rev_rows.append([
-                        f"{label} ({date})",
-                        fmt_val(est['revenue_avg'], 'dollars_large'),
-                        fmt_val(est['revenue_low'], 'dollars_large'),
-                        fmt_val(est['revenue_high'], 'dollars_large'),
-                        int(est['revenue_analyst_count']) if est.get('revenue_analyst_count') else '—'
-                    ])
-
-            if rev_rows:
-                lines.append("**Revenue Estimates:**")
-                lines.append("")
-                lines.append(tabulate(rev_rows, headers=rev_headers, tablefmt="pipe"))
-                lines.append("")
-
             # Beat/miss history
             beat_miss = eps.get('beat_miss_history', []) if eps else []
             if beat_miss:
-                lines.append("**Recent Beat/Miss History:**")
+                lines.append("**Beat/Miss History (Last 4 Quarters):**")
                 lines.append("")
                 bm_headers = ["Quarter", "Reported", "Estimated", "Surprise", "Surprise %"]
                 bm_rows = []
